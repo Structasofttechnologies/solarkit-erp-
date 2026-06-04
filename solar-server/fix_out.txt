@@ -1,0 +1,11 @@
+RUNNING_FIX:
+Indexes Before: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+EXPLICIT FAILED name_1_district_1: index not found with name [name_1_district_1]

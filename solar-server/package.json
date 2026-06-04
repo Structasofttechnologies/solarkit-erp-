@@ -1,0 +1,31 @@
+{
+  "name": "solarkits-erp-server",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "seed": "node scripts/seed.js",
+    "verify:hrms": "node scripts/verify_hrms.js",
+    "verify:checklist": "node scripts/verify_checklist_dynamic.js",
+    "verify:loan": "node scripts/verify_loan_dynamic.js",
+    "seed:performance": "node scripts/seedPerformance.js",
+    "seed:journey": "node scripts/seed_journey_stages.js",
+    "seed:leads": "node scripts/seed_leads.js",
+    "seed:approvals": "node scripts/seed_approvals_overdue.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.6",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.1",
+    "express-validator": "^7.3.1",
+    "jsonwebtoken": "^9.0.3",
+    "moment": "^2.30.1",
+    "mongoose": "^7.8.8"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}

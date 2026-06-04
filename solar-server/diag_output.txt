@@ -1,0 +1,2280 @@
+COLLECTIONS_LIST:
+- solarpanelbundles
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- combokitassignments
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- candidates
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "mobile": 1
+    },
+    "name": "mobile_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- brandmanufacturers
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- projectconfigurations
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- appdemos
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- designations
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "name": 1,
+      "department": 1
+    },
+    "name": "name_1_department_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- bundleplans
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- vendordeliveryplans
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "vendor": 1,
+      "deliveryType": 1,
+      "vehicle": 1
+    },
+    "name": "vendor_1_deliveryType_1_vehicle_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- temporaryincharges
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "originalUser": 1,
+      "startDate": 1,
+      "endDate": 1
+    },
+    "name": "originalUser_1_startDate_1_endDate_1",
+    "background": true
+  }
+]
+
+- projectoverduesettings
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "category": 1,
+      "subCategory": 1,
+      "projectType": 1,
+      "subProjectType": 1
+    },
+    "name": "category_1_subCategory_1_projectType_1_subProjectType_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- products
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "skuId": 1
+    },
+    "name": "skuId_1",
+    "background": true,
+    "unique": true,
+    "sparse": true
+  }
+]
+
+- clusters
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "code": 1
+    },
+    "name": "code_1",
+    "background": true,
+    "sparse": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "name": 1,
+      "district": 1
+    },
+    "name": "name_1_district_1",
+    "background": true,
+    "unique": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "name": 1,
+      "state": 1
+    },
+    "name": "name_1_state_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- installations
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "installationNumber": 1
+    },
+    "name": "installationNumber_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- amcservices
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- franchiseeprofessiontypes
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "name": 1,
+      "state": 1
+    },
+    "name": "name_1_state_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- installervendorplans
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- installeragencyplans
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- vendororders
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "orderNo": 1
+    },
+    "name": "orderNo_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- structuretypes
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "name": 1
+    },
+    "name": "name_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- inventoryitems
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "state": 1,
+      "city": 1,
+      "district": 1
+    },
+    "name": "state_1_city_1_district_1",
+    "background": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "sku": 1,
+      "state": 1,
+      "cluster": 1,
+      "district": 1
+    },
+    "name": "sku_1_state_1_cluster_1_district_1",
+    "background": true,
+    "unique": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "_fts": "text",
+      "_ftsx": 1
+    },
+    "name": "itemName_text_sku_text",
+    "background": true,
+    "weights": {
+      "itemName": 1,
+      "sku": 1
+    },
+    "default_language": "english",
+    "language_override": "language",
+    "textIndexVersion": 3
+  }
+]
+
+- projectcategorymappings
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "stateId": 1,
+      "clusterId": 1,
+      "categoryId": 1,
+      "subCategoryId": 1,
+      "projectTypeFrom": 1,
+      "projectTypeTo": 1,
+      "subProjectTypeId": 1
+    },
+    "name": "stateId_1_clusterId_1_categoryId_1_subCategoryId_1_projectTypeFrom_1_projectTypeTo_1_subProjectTypeId_1",
+    "background": true,
+    "unique": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "stateId": 1,
+      "clusterId": 1,
+      "categoryId": 1,
+      "subCategoryId": 1,
+      "projectTypeFrom": 1,
+      "projectTypeTo": 1
+    },
+    "name": "stateId_1_clusterId_1_categoryId_1_subCategoryId_1_projectTypeFrom_1_projectTypeTo_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- modulecompletions
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- dealerkycs
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "dealer": 1
+    },
+    "name": "dealer_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- partnergoals
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "partnerType": 1
+    },
+    "name": "partnerType_1",
+    "background": true
+  }
+]
+
+- discoms
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- suppliertypes
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- dealergoals
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- quotesettings
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- installertools
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- solarkits
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- inventorysettings
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- campaigns
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- candidatetests
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- setprices
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- categories
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "name": 1,
+      "projectTypeId": 1
+    },
+    "name": "name_1_projectTypeId_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- checklisttemplates
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "name": 1,
+      "cluster": 1,
+      "category": 1
+    },
+    "name": "name_1_cluster_1_category_1",
+    "background": true,
+    "unique": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "name": 1
+    },
+    "name": "name_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- approvaloverduerules
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "key": 1
+    },
+    "name": "key_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- permissions
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "name": 1
+    },
+    "name": "name_1",
+    "background": true,
+    "unique": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "module": 1,
+      "action": 1,
+      "name": 1
+    },
+    "name": "module_1_action_1_name_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- productprices
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- dealerprofessions
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "state": 1,
+      "name": 1
+    },
+    "name": "state_1_name_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- partnerplans
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "partnerType": 1
+    },
+    "name": "partnerType_1",
+    "background": true
+  }
+]
+
+- adminconfigs
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "section": 1,
+      "key": 1
+    },
+    "name": "section_1_key_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- restocklimits
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- projectdocuments
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- warehouses
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- vendordeliveryconfigs
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- departmentmoduleaccesses
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "departmentId": 1,
+      "moduleId": 1
+    },
+    "name": "departmentId_1_moduleId_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- statistics
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- states
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "code": 1
+    },
+    "name": "code_1",
+    "background": true,
+    "sparse": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "name": 1,
+      "country": 1
+    },
+    "name": "name_1_country_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- amcplans
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- partnerrewards
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "partnerType": 1
+    },
+    "name": "partnerType_1",
+    "background": true
+  }
+]
+
+- tasks
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- dealerrewards
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- surveys
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "lead": 1
+    },
+    "name": "lead_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- roles
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "name": 1,
+      "department": 1,
+      "country": 1,
+      "state": 1,
+      "cluster": 1,
+      "district": 1
+    },
+    "name": "name_1_department_1_country_1_state_1_cluster_1_district_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- subcategories
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- suppliervendorplans
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- approvals
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "status": 1,
+      "type": 1
+    },
+    "name": "status_1_type_1",
+    "background": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "location.state": 1,
+      "location.district": 1
+    },
+    "name": "location.state_1_location.district_1",
+    "background": true
+  }
+]
+
+- departments
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "name": 1,
+      "country": 1
+    },
+    "name": "name_1_country_1",
+    "background": true,
+    "unique": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "code": 1
+    },
+    "name": "code_1",
+    "background": true,
+    "sparse": true
+  }
+]
+
+- projects
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "projectId": 1
+    },
+    "name": "projectId_1",
+    "background": true,
+    "unique": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "status": 1
+    },
+    "name": "status_1",
+    "background": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "state": 1
+    },
+    "name": "state_1",
+    "background": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "cluster": 1
+    },
+    "name": "cluster_1",
+    "background": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "category": 1
+    },
+    "name": "category_1",
+    "background": true
+  }
+]
+
+- partners
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "name": 1
+    },
+    "name": "name_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- customizedcombokits
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- offers
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- loanapplications
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "applicationNumber": 1
+    },
+    "name": "applicationNumber_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- franchiseemanagersettings
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "state": 1,
+      "cluster": 1,
+      "district": 1
+    },
+    "name": "state_1_cluster_1_district_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- vehicles
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- franchiseeplans
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "name": 1,
+      "state": 1
+    },
+    "name": "name_1_state_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- cities
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "name": 1,
+      "zones": 1,
+      "areaType": 1
+    },
+    "name": "name_1_zones_1_areaType_1",
+    "background": true,
+    "unique": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "name": 1,
+      "district": 1,
+      "areaType": 1
+    },
+    "name": "name_1_district_1_areaType_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- channelpartnerplans
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- modules
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "name": 1
+    },
+    "name": "name_1",
+    "background": true,
+    "unique": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "key": 1
+    },
+    "name": "key_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- setpriceamcs
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- installervendors
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "email": 1
+    },
+    "name": "email_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- campaignconfigs
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- projectsteps
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "code": 1
+    },
+    "name": "code_1",
+    "background": true,
+    "unique": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "order": 1
+    },
+    "name": "order_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- projectjourneystages
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- tickets
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "ticketId": 1
+    },
+    "name": "ticketId_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- franchiseeonboardinggoals
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- leads
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- installationrates
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- subprojecttypes
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- userperformances
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- districts
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "code": 1
+    },
+    "name": "code_1",
+    "background": true,
+    "sparse": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "name": 1,
+      "state": 1
+    },
+    "name": "name_1_state_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- brandsuppliers
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "state": 1,
+      "cluster": 1,
+      "district": 1
+    },
+    "name": "state_1_cluster_1_district_1",
+    "background": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "type": 1
+    },
+    "name": "type_1",
+    "background": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "manufacturer": 1
+    },
+    "name": "manufacturer_1",
+    "background": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "state": 1,
+      "cluster": 1,
+      "district": 1,
+      "city": 1
+    },
+    "name": "state_1_cluster_1_district_1_city_1",
+    "background": true
+  }
+]
+
+- orders
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "orderNumber": 1
+    },
+    "name": "orderNumber_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- franchiseerewards
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- installerratings
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- brands
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "brandName": 1
+    },
+    "name": "brandName_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- buyleadsettings
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- projectworkflowmappings
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- solarinstallers
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- dealerplans
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- users
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "email": 1
+    },
+    "name": "email_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- countries
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "name": 1
+    },
+    "name": "name_1",
+    "background": true,
+    "unique": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "code": 1
+    },
+    "name": "code_1",
+    "background": true,
+    "unique": true,
+    "sparse": true
+  }
+]
+
+- partnerprofessions
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "partnerType": 1
+    },
+    "name": "partnerType_1",
+    "background": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "partnerType": 1,
+      "name": 1,
+      "state": 1
+    },
+    "name": "partnerType_1_name_1_state_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- procurementorders
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "orderNumber": 1
+    },
+    "name": "orderNumber_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- suppliervendors
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "email": 1
+    },
+    "name": "email_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- overduestatussettings
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "department": 1
+    },
+    "name": "department_1",
+    "background": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "state": 1
+    },
+    "name": "state_1",
+    "background": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "city": 1
+    },
+    "name": "city_1",
+    "background": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "department": 1,
+      "state": 1,
+      "city": 1
+    },
+    "name": "department_1_state_1_city_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- franchiseeordersettings
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- deliverytypes
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- buildingtypes
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "name": 1
+    },
+    "name": "name_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- deliveries
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "deliveryNumber": 1
+    },
+    "name": "deliveryNumber_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- projecttypes
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "name": 1
+    },
+    "name": "name_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- overduetasksettings
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- orderprocurementsettings
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- surveyboms
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- checklistcategories
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "title": 1
+    },
+    "name": "title_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- resignations
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- candidatetrainings
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- deliverybenchmarkprices
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- countrymasters
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "name": 1
+    },
+    "name": "name_1",
+    "background": true,
+    "unique": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "code": 1
+    },
+    "name": "code_1",
+    "background": true,
+    "unique": true,
+    "sparse": true
+  }
+]
+
+- units
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "unitName": 1
+    },
+    "name": "unitName_1",
+    "background": true,
+    "unique": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "symbol": 1
+    },
+    "name": "symbol_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- socialmediacampaigns
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- vacancies
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- terracetypes
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "name": 1
+    },
+    "name": "name_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- placeholdernames
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "labelKey": 1
+    },
+    "name": "labelKey_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- disputes
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "disputeId": 1
+    },
+    "name": "disputeId_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- installeragencies
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- pricemasters
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "productId": 1,
+      "stateId": 1,
+      "clusterId": 1,
+      "technology": 1
+    },
+    "name": "productId_1_stateId_1_clusterId_1_technology_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- skus
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "skuCode": 1
+    },
+    "name": "skuCode_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- zones
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "code": 1
+    },
+    "name": "code_1",
+    "background": true,
+    "sparse": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "name": 1,
+      "cluster": 1
+    },
+    "name": "name_1_cluster_1",
+    "background": true,
+    "unique": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "name": 1,
+      "state": 1
+    },
+    "name": "name_1_state_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- loanrules
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- areas
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "code": 1
+    },
+    "name": "code_1",
+    "background": true,
+    "sparse": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "name": 1,
+      "district": 1
+    },
+    "name": "name_1_district_1",
+    "background": true,
+    "unique": true
+  }
+]
+
+- leaverequests
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  }
+]
+
+- hrmssettings
+  Indexes: [
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "department": 1,
+      "position": 1
+    },
+    "name": "department_1_position_1",
+    "background": true
+  }
+]
+

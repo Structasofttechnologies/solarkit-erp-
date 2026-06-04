@@ -1,0 +1,101 @@
+[
+  {
+    "_id": "69bbfa7d025e140537bb8567",
+    "loginTypeName": "test",
+    "__v": 0,
+    "assignModules": "P.O Order",
+    "category": [
+      "Solar Rooftop"
+    ],
+    "clusterId": "69a2aa9a12c7798b2d4be819",
+    "countryId": "69a2a3e276790c4ac681ce9e",
+    "createdAt": "2026-03-19T13:30:36.987Z",
+    "districtId": "69a2a65776790c4ac681cf24",
+    "loginAccessType": "Distributor",
+    "modulesTasks": [
+      "Manage",
+      "Track",
+      "Approvals",
+      "Organization chart"
+    ],
+    "orderTat": "10 Days",
+    "projectType": [
+      "3 to 30 kW"
+    ],
+    "stateId": "69a2a5d476790c4ac681ceba",
+    "subCategory": [
+      "Commercial"
+    ],
+    "subType": [
+      "On-Grid"
+    ],
+    "updatedAt": "2026-03-19T13:30:36.987Z"
+  },
+  {
+    "_id": "69bd79f1025e140537bb8cad",
+    "loginTypeName": "test 1",
+    "__v": 0,
+    "assignModules": "P.O Order",
+    "category": [
+      "Solar Rooftop"
+    ],
+    "clusterId": "69a2aa9a12c7798b2d4be819",
+    "countryId": "69a2a3e276790c4ac681ce9e",
+    "createdAt": "2026-03-20T16:46:41.241Z",
+    "districtId": "69a2a62876790c4ac681ceeb",
+    "loginAccessType": "EPC supplier",
+    "modulesTasks": [
+      "Order Management(Bidding)",
+      "Inventory Management",
+      "Create Delivery Plan",
+      "Delivery",
+      "Pickup",
+      "Add Product"
+    ],
+    "orderTat": "10 Days",
+    "projectType": [
+      "3 to 30 kW"
+    ],
+    "stateId": "69a2a5d476790c4ac681ceba",
+    "subCategory": [
+      "Commercial"
+    ],
+    "subType": [
+      "On-Grid"
+    ],
+    "updatedAt": "2026-03-20T16:46:41.241Z"
+  },
+  {
+    "_id": "69bd86b2025e140537bb8cc2",
+    "loginTypeName": "test 2",
+    "__v": 0,
+    "assignModules": "Bidding",
+    "category": [
+      "Solar Rooftop"
+    ],
+    "clusterId": "69a2aa9a12c7798b2d4be819",
+    "countryId": "69a2a3e276790c4ac681ce9e",
+    "createdAt": "2026-03-20T17:41:06.172Z",
+    "districtId": "69a2a62876790c4ac681ceeb",
+    "loginAccessType": "Dealer",
+    "modulesTasks": [
+      "Order Management(Bidding)",
+      "Inventory Management",
+      "Create Delivery Plan",
+      "Delivery",
+      "Pickup"
+    ],
+    "orderTat": "10 Days",
+    "projectType": [
+      "3 to 30 kW"
+    ],
+    "stateId": "69a2a5d476790c4ac681ceba",
+    "subCategory": [
+      "Commercial"
+    ],
+    "subType": [
+      "On-Grid"
+    ],
+    "updatedAt": "2026-03-20T17:41:06.172Z"
+  }
+]
