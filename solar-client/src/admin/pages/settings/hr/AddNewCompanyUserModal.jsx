@@ -2,13 +2,18 @@ import React, { useState } from 'react';
 import { X, User, Phone, Mail, MapPin, Target, Calendar, Plus, Users, FileText, IndianRupee, AlertCircle, Loader2 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import api from '../../../../api/axios.js';
+import { locationAPI } from '../../../../api/api.js';
 
 export default function AddNewCompanyUserModal({ isOpen, onClose, onSuccess }) {
   const [formData, setFormData] = useState({
     fullName: '',
     mobileNumber: '',
     emailAddress: '',
+    country: '',
+    state: '',
+    cluster: '',
     district: '',
+    city: '',
     partnerGoalsEnabled: false,
     partnerMonthlyTargetKw: '',
     partnerPerKwCommission: '',
@@ -27,6 +32,64 @@ export default function AddNewCompanyUserModal({ isOpen, onClose, onSuccess }) {
   const [addedProjectTypes, setAddedProjectTypes] = useState([]);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [locationData, setLocationData] = useState({
+    countries: [],
+    states: [],
+    clusters: [],
+    districts: [],
+    cities: []
+  });
+
+  React.useEffect(() => {
+    if (isOpen) {
+      locationAPI.getAllCountries({ isActive: true }).then(res => {
+        if (res.data?.data) setLocationData(prev => ({ ...prev, countries: res.data.data }));
+      }).catch(err => console.error(err));
+    }
+  }, [isOpen]);
+
+  React.useEffect(() => {
+    if (formData.country) {
+      locationAPI.getAllStates({ countryId: formData.country, isActive: true }).then(res => {
+        if (res.data?.data) setLocationData(prev => ({ ...prev, states: res.data.data }));
+      }).catch(err => console.error(err));
+    } else {
+      setLocationData(prev => ({ ...prev, states: [], clusters: [], districts: [], cities: [] }));
+    }
+  }, [formData.country]);
+
+  React.useEffect(() => {
+    if (formData.state) {
+      locationAPI.getAllClusters({ stateId: formData.state, isActive: true }).then(res => {
+        if (res.data?.data) setLocationData(prev => ({ ...prev, clusters: res.data.data }));
+      }).catch(err => console.error(err));
+      
+      locationAPI.getAllDistricts({ stateId: formData.state, isActive: true }).then(res => {
+        if (res.data?.data) setLocationData(prev => ({ ...prev, districts: res.data.data }));
+      }).catch(err => console.error(err));
+    } else {
+      setLocationData(prev => ({ ...prev, clusters: [], districts: [], cities: [] }));
+    }
+  }, [formData.state]);
+
+  React.useEffect(() => {
+    if (formData.cluster) {
+      locationAPI.getAllDistricts({ stateId: formData.state, clusterId: formData.cluster, isActive: true }).then(res => {
+        if (res.data?.data) setLocationData(prev => ({ ...prev, districts: res.data.data }));
+      }).catch(err => console.error(err));
+    }
+  }, [formData.cluster]);
+
+  React.useEffect(() => {
+    if (formData.district) {
+      locationAPI.getAllCities({ districtId: formData.district, isActive: true }).then(res => {
+        if (res.data?.data) setLocationData(prev => ({ ...prev, cities: res.data.data }));
+      }).catch(err => console.error(err));
+    } else {
+      setLocationData(prev => ({ ...prev, cities: [] }));
+    }
+  }, [formData.district]);
 
   if (!isOpen) return null;
 
@@ -79,7 +142,11 @@ export default function AddNewCompanyUserModal({ isOpen, onClose, onSuccess }) {
         fullName: formData.fullName.trim(),
         mobileNumber: formData.mobileNumber.trim(),
         emailAddress: formData.emailAddress.trim(),
-        district: formData.district.trim(),
+        country: formData.country,
+        state: formData.state,
+        cluster: formData.cluster,
+        district: formData.district,
+        city: formData.city,
 
         // Partner Goals
         partnerGoalsEnabled: formData.partnerGoalsEnabled,
@@ -107,7 +174,8 @@ export default function AddNewCompanyUserModal({ isOpen, onClose, onSuccess }) {
         onClose();
         // Reset form
         setFormData({
-          fullName: '', mobileNumber: '', emailAddress: '', district: '',
+          fullName: '', mobileNumber: '', emailAddress: '', 
+          country: '', state: '', cluster: '', district: '', city: '',
           partnerGoalsEnabled: false, partnerMonthlyTargetKw: '', partnerPerKwCommission: '',
           partnerQuoteCreate: true, partnerQuoteEdit: false, partnerQuoteDelete: false,
           projectGoalEnabled: false, projectMonthlyTargetKw: '', projectPerKwCommission: '',
@@ -204,21 +272,106 @@ export default function AddNewCompanyUserModal({ isOpen, onClose, onSuccess }) {
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">District *</label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <MapPin size={16} className="text-gray-400" />
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">Country</label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <MapPin size={16} className="text-gray-400" />
+                  </div>
+                  <select
+                    name="country"
+                    value={formData.country}
+                    onChange={handleInputChange}
+                    className="pl-10 w-full p-2.5 border border-gray-200 rounded-lg focus:border-[#2e7d32] focus:ring-1 focus:ring-[#2e7d32] outline-none transition-all appearance-none bg-white"
+                  >
+                    <option value="">Select Country</option>
+                    {locationData.countries.map(item => (
+                      <option key={item._id} value={item._id}>{item.name}</option>
+                    ))}
+                  </select>
                 </div>
-                <input 
-                  type="text" 
-                  name="district"
-                  value={formData.district}
-                  onChange={handleInputChange}
-                  placeholder="Enter district name"
-                  className="pl-10 w-full p-2.5 border border-gray-200 rounded-lg focus:border-[#2e7d32] focus:ring-1 focus:ring-[#2e7d32] outline-none transition-all"
-                  required
-                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">State</label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <MapPin size={16} className="text-gray-400" />
+                  </div>
+                  <select
+                    name="state"
+                    value={formData.state}
+                    onChange={handleInputChange}
+                    className="pl-10 w-full p-2.5 border border-gray-200 rounded-lg focus:border-[#2e7d32] focus:ring-1 focus:ring-[#2e7d32] outline-none transition-all appearance-none bg-white"
+                  >
+                    <option value="">Select State</option>
+                    {locationData.states.map(item => (
+                      <option key={item._id} value={item._id}>{item.name}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">Cluster</label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <MapPin size={16} className="text-gray-400" />
+                  </div>
+                  <select
+                    name="cluster"
+                    value={formData.cluster}
+                    onChange={handleInputChange}
+                    className="pl-10 w-full p-2.5 border border-gray-200 rounded-lg focus:border-[#2e7d32] focus:ring-1 focus:ring-[#2e7d32] outline-none transition-all appearance-none bg-white"
+                  >
+                    <option value="">Select Cluster</option>
+                    {locationData.clusters.map(item => (
+                      <option key={item._id} value={item._id}>{item.name}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">District *</label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <MapPin size={16} className="text-gray-400" />
+                  </div>
+                  <select
+                    name="district"
+                    value={formData.district}
+                    onChange={handleInputChange}
+                    required
+                    className="pl-10 w-full p-2.5 border border-gray-200 rounded-lg focus:border-[#2e7d32] focus:ring-1 focus:ring-[#2e7d32] outline-none transition-all appearance-none bg-white"
+                  >
+                    <option value="">Select District</option>
+                    {locationData.districts.map(item => (
+                      <option key={item._id} value={item._id}>{item.name}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">City</label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <MapPin size={16} className="text-gray-400" />
+                  </div>
+                  <select
+                    name="city"
+                    value={formData.city}
+                    onChange={handleInputChange}
+                    className="pl-10 w-full p-2.5 border border-gray-200 rounded-lg focus:border-[#2e7d32] focus:ring-1 focus:ring-[#2e7d32] outline-none transition-all appearance-none bg-white"
+                  >
+                    <option value="">Select City</option>
+                    {locationData.cities.map(item => (
+                      <option key={item._id} value={item._id}>{item.name}</option>
+                    ))}
+                  </select>
+                </div>
               </div>
             </div>
           </div>

@@ -68,7 +68,7 @@ export const getAllManufacturers = async (req, res) => {
             .populate('city', 'name')
             .sort({ createdAt: -1 });
 
-        res.status(200).json({ success: true, count: manufacturers.length, data: manufacturers });
+        res.status(200).json({ success: true, message: "Brands fetched successfully", count: manufacturers.length, data: manufacturers });
     } catch (error) {
         console.error('Error fetching manufacturers:', error);
         res.status(500).json({ message: 'Server error fetching manufacturers', error: error.message });

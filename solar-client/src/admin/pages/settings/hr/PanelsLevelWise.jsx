@@ -127,7 +127,7 @@ const formatPanelName = (name) => {
 const getStaticModulesForPanelName = (pName) => {
   if (!pName) return [];
   pName = pName.toLowerCase();
-  
+
   if (pName.includes('account')) {
     return [
       { _id: 'am_1', name: 'Dashboard' },
@@ -199,12 +199,12 @@ const getStaticModulesForPanelName = (pName) => {
       { _id: 'ad_1_6', name: 'Inventory', parentModule: 'ad_1' },
       { _id: 'ad_1_7', name: 'Vendors', parentModule: 'ad_1' },
       { _id: 'ad_1_8', name: 'Project Report', parentModule: 'ad_1' },
-      
+
       { _id: 'ad_2', name: 'Departments' },
       { _id: 'ad_2_1', name: 'Organization chart', parentModule: 'ad_2' },
-      
+
       { _id: 'ad_3', name: 'Approvals' },
-      
+
       { _id: 'ad_4', name: 'Project Management' },
       { _id: 'ad_4_1', name: 'Company', parentModule: 'ad_4' },
       { _id: 'ad_4_1_1', name: 'Management', parentModule: 'ad_4_1' },
@@ -233,7 +233,7 @@ const getStaticModulesForPanelName = (pName) => {
       { _id: 'ad_6', name: 'Settings' },
       { _id: 'ad_6_1', name: 'Location Settings', parentModule: 'ad_6' },
       { _id: 'ad_6_1_1', name: 'Setup Locations', parentModule: 'ad_6_1' },
-      
+
       { _id: 'ad_6_2', name: 'HR Settings', parentModule: 'ad_6' },
       { _id: 'ad_6_2_1', name: 'Role Settings', parentModule: 'ad_6_2' },
       { _id: 'ad_6_2_2', name: 'Create Department', parentModule: 'ad_6_2' },
@@ -242,21 +242,21 @@ const getStaticModulesForPanelName = (pName) => {
       { _id: 'ad_6_2_5', name: 'Temporary Incharge Setting', parentModule: 'ad_6_2' },
       { _id: 'ad_6_2_6', name: 'Leave Approvals', parentModule: 'ad_6_2' },
       { _id: 'ad_6_2_7', name: 'Resign Approvals', parentModule: 'ad_6_2' },
-      
+
       { _id: 'ad_6_3', name: 'Vendor Settings', parentModule: 'ad_6' },
       { _id: 'ad_6_3_1', name: 'Installer Vendors', parentModule: 'ad_6_3' },
       { _id: 'ad_6_3_2', name: 'Supplier Type', parentModule: 'ad_6_3' },
       { _id: 'ad_6_3_3', name: 'Supplier Vendors', parentModule: 'ad_6_3' },
-      
+
       { _id: 'ad_6_4', name: 'Sales Settings', parentModule: 'ad_6' },
       { _id: 'ad_6_4_1', name: 'Set Price', parentModule: 'ad_6_4' },
       { _id: 'ad_6_4_2', name: 'Set Price For AMC', parentModule: 'ad_6_4' },
       { _id: 'ad_6_4_3', name: 'Offers', parentModule: 'ad_6_4' },
       { _id: 'ad_6_4_4', name: 'Solar Panel Bundle Setting', parentModule: 'ad_6_4' },
-      
+
       { _id: 'ad_6_5', name: 'Marketing Settings', parentModule: 'ad_6' },
       { _id: 'ad_6_5_1', name: 'Campaign Management', parentModule: 'ad_6_5' },
-      
+
       { _id: 'ad_6_6', name: 'Settings Operations', parentModule: 'ad_6' },
       { _id: 'ad_6_6_1', name: 'Delivery Settings', parentModule: 'ad_6_6' },
       { _id: 'ad_6_6_1_1', name: 'Delivery Type', parentModule: 'ad_6_6_1' },
@@ -268,13 +268,13 @@ const getStaticModulesForPanelName = (pName) => {
       { _id: 'ad_6_6_2_3', name: 'Combokit Brand Overview', parentModule: 'ad_6_6_2' },
       { _id: 'ad_6_6_3', name: 'Order Procurement', parentModule: 'ad_6_6' },
       { _id: 'ad_6_6_3_1', name: 'Order Procurement', parentModule: 'ad_6_6_3' },
-      
+
       { _id: 'ad_6_7', name: 'Installer Settings', parentModule: 'ad_6' },
       { _id: 'ad_6_7_1', name: 'Solar Installer', parentModule: 'ad_6_7' },
       { _id: 'ad_6_7_2', name: 'Installer Tool Requirements', parentModule: 'ad_6_7' },
       { _id: 'ad_6_7_3', name: 'Rating Setting', parentModule: 'ad_6_7' },
       { _id: 'ad_6_7_4', name: 'Installer Agency Plans', parentModule: 'ad_6_7' },
-      
+
       { _id: 'ad_6_8', name: 'Product Configuration', parentModule: 'ad_6' },
       { _id: 'ad_6_8_1', name: 'Add Project Type', parentModule: 'ad_6_8' },
       { _id: 'ad_6_8_2', name: 'Add Project Category', parentModule: 'ad_6_8' },
@@ -282,7 +282,7 @@ const getStaticModulesForPanelName = (pName) => {
       { _id: 'ad_6_8_4', name: 'SKU', parentModule: 'ad_6_8' },
       { _id: 'ad_6_8_5', name: 'Price Master', parentModule: 'ad_6_8' },
       { _id: 'ad_6_8_6', name: 'Add Unit Management', parentModule: 'ad_6_8' },
-      
+
       { _id: 'ad_6_9', name: 'ComboKit', parentModule: 'ad_6' },
       { _id: 'ad_6_9_1', name: 'Create Solarkit', parentModule: 'ad_6_9' },
       { _id: 'ad_6_9_2', name: 'Create AMC Plans', parentModule: 'ad_6_9' },
@@ -291,7 +291,7 @@ const getStaticModulesForPanelName = (pName) => {
       { _id: 'ad_6_9_5', name: 'Add ComboKit', parentModule: 'ad_6_9' },
       { _id: 'ad_6_9_6', name: 'Customize Combokit', parentModule: 'ad_6_9' },
       { _id: 'ad_6_9_7', name: 'Combokit Overview', parentModule: 'ad_6_9' },
-      
+
       { _id: 'ad_6_10', name: 'Partner Settings', parentModule: 'ad_6' },
       { _id: 'ad_6_10_1', name: 'Partner Plans', parentModule: 'ad_6_10' },
       { _id: 'ad_6_10_2', name: 'Partner Points & Reward Setting', parentModule: 'ad_6_10' },
@@ -300,21 +300,21 @@ const getStaticModulesForPanelName = (pName) => {
       { _id: 'ad_6_10_5', name: 'Add Partner', parentModule: 'ad_6_10' },
       { _id: 'ad_6_10_6', name: 'Partner Manager Setting', parentModule: 'ad_6_10' },
       { _id: 'ad_6_10_7', name: 'Partner Buy Lead Setting', parentModule: 'ad_6_10' },
-      
+
       { _id: 'ad_6_11', name: 'HRMS Settings', parentModule: 'ad_6' },
       { _id: 'ad_6_11_1', name: 'HRMS Settings', parentModule: 'ad_6_11' },
       { _id: 'ad_6_11_2', name: 'Vacancy Module', parentModule: 'ad_6_11' },
       { _id: 'ad_6_11_3', name: 'Candidates List', parentModule: 'ad_6_11' },
       { _id: 'ad_6_11_4', name: 'Candidate Test Setting', parentModule: 'ad_6_11' },
       { _id: 'ad_6_11_5', name: 'Candidate Training Setting', parentModule: 'ad_6_11' },
-      
+
       { _id: 'ad_6_12', name: 'Project Management Settings', parentModule: 'ad_6' },
       { _id: 'ad_6_12_1', name: 'Project Journey Stage Setting', parentModule: 'ad_6_12' },
       { _id: 'ad_6_12_2', name: 'Project Management Overdue Setting', parentModule: 'ad_6_12' },
       { _id: 'ad_6_12_3', name: 'Project Management Configuration', parentModule: 'ad_6_12' },
       { _id: 'ad_6_12_4', name: 'Project Documentation Setting', parentModule: 'ad_6_12' },
       { _id: 'ad_6_12_5', name: 'Placeholder Name Setting', parentModule: 'ad_6_12' },
-      
+
       { _id: 'ad_6_13', name: 'Quote', parentModule: 'ad_6' },
       { _id: 'ad_6_13_1', name: 'Quote Setting', parentModule: 'ad_6_13' },
       { _id: 'ad_6_13_2', name: 'Survey BOM Setting', parentModule: 'ad_6_13' },
@@ -322,12 +322,12 @@ const getStaticModulesForPanelName = (pName) => {
       { _id: 'ad_6_13_4', name: 'Structure Setting', parentModule: 'ad_6_13' },
       { _id: 'ad_6_13_5', name: 'Building Setting', parentModule: 'ad_6_13' },
       { _id: 'ad_6_13_6', name: 'Discom Master', parentModule: 'ad_6_13' },
-      
+
       { _id: 'ad_6_14', name: 'Overdue Setting', parentModule: 'ad_6' },
       { _id: 'ad_6_14_1', name: 'Approval Overdue Setting', parentModule: 'ad_6_14' },
       { _id: 'ad_6_14_2', name: 'Overdue Task Setting', parentModule: 'ad_6_14' },
       { _id: 'ad_6_14_3', name: 'Overdue Status Setting', parentModule: 'ad_6_14' },
-      
+
       { _id: 'ad_6_15', name: 'Loan Setting', parentModule: 'ad_6' },
       { _id: 'ad_6_16', name: 'Checklist Setting', parentModule: 'ad_6' },
 
@@ -385,6 +385,9 @@ export default function PanelsLevelWise() {
   const [logSearch, setLogSearch] = useState('');
   const [userTypeFilter, setUserTypeFilter] = useState('all');
 
+  const [userCurrentPage, setUserCurrentPage] = useState(1);
+  const usersPerPage = 10;
+
   // Add User Modal state
   const [showAddUserModal, setShowAddUserModal] = useState(false);
 
@@ -429,6 +432,10 @@ export default function PanelsLevelWise() {
     };
     fetchCountries();
   }, []);
+
+  useEffect(() => {
+    setUserCurrentPage(1);
+  }, [userSearch, userTypeFilter, selectedLocation, users.length]);
 
   useEffect(() => {
     const fetchStates = async () => {
@@ -861,11 +868,11 @@ export default function PanelsLevelWise() {
       toast.error('Please assign a workspace panel first');
       return;
     }
-    
+
     // DUMMY FUNCTIONALITY FOR NOW
     toast.success(`Access settings saved for '${configuringUser.name}' (Dummy mode)`);
     setConfiguringUser(null);
-    
+
     /* ORIGINAL API CALL
     try {
       const res = await rbacApi.assignUserPanel(userAssignForm);
@@ -928,6 +935,17 @@ export default function PanelsLevelWise() {
 
     return matchSearch && matchLocation && matchType;
   });
+
+  const sortedUsers = [...filteredUsers].sort((a, b) => {
+    const dateA = new Date(a.createdAt || 0);
+    const dateB = new Date(b.createdAt || 0);
+    return dateB - dateA;
+  });
+
+  const indexOfLastUser = userCurrentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = sortedUsers.slice(indexOfFirstUser, indexOfLastUser);
+  const totalUserPages = Math.ceil(sortedUsers.length / usersPerPage);
 
   const LocationCard = ({ title, subtitle, isSelected, onClick }) => (
     <div
@@ -997,11 +1015,10 @@ export default function PanelsLevelWise() {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`flex items-center gap-2 px-5 py-3 rounded-t-xl text-sm font-bold transition-all border-b-2 ${
-              activeTab === tab.id
+            className={`flex items-center gap-2 px-5 py-3 rounded-t-xl text-sm font-bold transition-all border-b-2 ${activeTab === tab.id
                 ? 'border-blue-600 text-blue-700 bg-white font-extrabold shadow-sm'
                 : 'border-transparent text-slate-500 hover:text-slate-800 hover:bg-slate-100'
-            }`}
+              }`}
           >
             <tab.icon size={16} />
             {tab.label}
@@ -1046,7 +1063,7 @@ export default function PanelsLevelWise() {
                       <th className="py-4 px-6 font-bold text-slate-700 text-sm sticky left-0 z-20 bg-slate-50 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.1)] min-w-[250px] w-[250px]">
                         Panel Roles
                       </th>
-                      
+
                       {/* Module Columns */}
                       {groupedModules.map((mod) => {
                         if (mod.isSubmodule) {
@@ -1060,8 +1077,8 @@ export default function PanelsLevelWise() {
                         const hasChildren = !mod.isSubmodule && groupedModules.some(c => c.isSubmodule && (c.parentModule === mod._id || c.parentModule?._id === mod._id));
 
                         return (
-                          <th 
-                            key={mod._id} 
+                          <th
+                            key={mod._id}
                             className={`py-3 px-4 border-l border-slate-200 text-center min-w-[170px] max-w-[200px] ${mod.isSubmodule ? 'bg-slate-100/50' : 'bg-slate-50'} ${!mod.isSubmodule && hasChildren ? 'cursor-pointer hover:bg-slate-200 transition-colors' : ''}`}
                             onClick={() => {
                               if (!mod.isSubmodule && hasChildren) toggleMatrixRow(mod._id);
@@ -1090,7 +1107,7 @@ export default function PanelsLevelWise() {
                             {panel.level || 'Country'} Level
                           </span>
                         </td>
-                        
+
                         {groupedModules.map((mod) => {
                           if (mod.isSubmodule) {
                             const pId = mod.parentModule?._id || mod.parentModule;
@@ -1218,7 +1235,7 @@ export default function PanelsLevelWise() {
                     {panels.map((panel) => {
                       let displayModules = [];
                       const pName = panel.name.toLowerCase();
-                      
+
                       if (pName.includes('account')) {
                         displayModules = [
                           { _id: 'am_1', name: 'Dashboard' },
@@ -1290,12 +1307,12 @@ export default function PanelsLevelWise() {
                           { _id: 'ad_1_6', name: 'Inventory', parentModule: 'ad_1' },
                           { _id: 'ad_1_7', name: 'Vendors', parentModule: 'ad_1' },
                           { _id: 'ad_1_8', name: 'Project Report', parentModule: 'ad_1' },
-                          
+
                           { _id: 'ad_2', name: 'Departments' },
                           { _id: 'ad_2_1', name: 'Organization chart', parentModule: 'ad_2' },
-                          
+
                           { _id: 'ad_3', name: 'Approvals' },
-                          
+
                           { _id: 'ad_4', name: 'Project Management' },
                           { _id: 'ad_4_1', name: 'Company', parentModule: 'ad_4' },
                           { _id: 'ad_4_1_1', name: 'Management', parentModule: 'ad_4_1' },
@@ -1324,7 +1341,7 @@ export default function PanelsLevelWise() {
                           { _id: 'ad_6', name: 'Settings' },
                           { _id: 'ad_6_1', name: 'Location Settings', parentModule: 'ad_6' },
                           { _id: 'ad_6_1_1', name: 'Setup Locations', parentModule: 'ad_6_1' },
-                          
+
                           { _id: 'ad_6_2', name: 'HR Settings', parentModule: 'ad_6' },
                           { _id: 'ad_6_2_1', name: 'Role Settings', parentModule: 'ad_6_2' },
                           { _id: 'ad_6_2_2', name: 'Create Department', parentModule: 'ad_6_2' },
@@ -1333,21 +1350,21 @@ export default function PanelsLevelWise() {
                           { _id: 'ad_6_2_5', name: 'Temporary Incharge Setting', parentModule: 'ad_6_2' },
                           { _id: 'ad_6_2_6', name: 'Leave Approvals', parentModule: 'ad_6_2' },
                           { _id: 'ad_6_2_7', name: 'Resign Approvals', parentModule: 'ad_6_2' },
-                          
+
                           { _id: 'ad_6_3', name: 'Vendor Settings', parentModule: 'ad_6' },
                           { _id: 'ad_6_3_1', name: 'Installer Vendors', parentModule: 'ad_6_3' },
                           { _id: 'ad_6_3_2', name: 'Supplier Type', parentModule: 'ad_6_3' },
                           { _id: 'ad_6_3_3', name: 'Supplier Vendors', parentModule: 'ad_6_3' },
-                          
+
                           { _id: 'ad_6_4', name: 'Sales Settings', parentModule: 'ad_6' },
                           { _id: 'ad_6_4_1', name: 'Set Price', parentModule: 'ad_6_4' },
                           { _id: 'ad_6_4_2', name: 'Set Price For AMC', parentModule: 'ad_6_4' },
                           { _id: 'ad_6_4_3', name: 'Offers', parentModule: 'ad_6_4' },
                           { _id: 'ad_6_4_4', name: 'Solar Panel Bundle Setting', parentModule: 'ad_6_4' },
-                          
+
                           { _id: 'ad_6_5', name: 'Marketing Settings', parentModule: 'ad_6' },
                           { _id: 'ad_6_5_1', name: 'Campaign Management', parentModule: 'ad_6_5' },
-                          
+
                           { _id: 'ad_6_6', name: 'Settings Operations', parentModule: 'ad_6' },
                           { _id: 'ad_6_6_1', name: 'Delivery Settings', parentModule: 'ad_6_6' },
                           { _id: 'ad_6_6_1_1', name: 'Delivery Type', parentModule: 'ad_6_6_1' },
@@ -1359,13 +1376,13 @@ export default function PanelsLevelWise() {
                           { _id: 'ad_6_6_2_3', name: 'Combokit Brand Overview', parentModule: 'ad_6_6_2' },
                           { _id: 'ad_6_6_3', name: 'Order Procurement', parentModule: 'ad_6_6' },
                           { _id: 'ad_6_6_3_1', name: 'Order Procurement', parentModule: 'ad_6_6_3' },
-                          
+
                           { _id: 'ad_6_7', name: 'Installer Settings', parentModule: 'ad_6' },
                           { _id: 'ad_6_7_1', name: 'Solar Installer', parentModule: 'ad_6_7' },
                           { _id: 'ad_6_7_2', name: 'Installer Tool Requirements', parentModule: 'ad_6_7' },
                           { _id: 'ad_6_7_3', name: 'Rating Setting', parentModule: 'ad_6_7' },
                           { _id: 'ad_6_7_4', name: 'Installer Agency Plans', parentModule: 'ad_6_7' },
-                          
+
                           { _id: 'ad_6_8', name: 'Product Configuration', parentModule: 'ad_6' },
                           { _id: 'ad_6_8_1', name: 'Add Project Type', parentModule: 'ad_6_8' },
                           { _id: 'ad_6_8_2', name: 'Add Project Category', parentModule: 'ad_6_8' },
@@ -1373,7 +1390,7 @@ export default function PanelsLevelWise() {
                           { _id: 'ad_6_8_4', name: 'SKU', parentModule: 'ad_6_8' },
                           { _id: 'ad_6_8_5', name: 'Price Master', parentModule: 'ad_6_8' },
                           { _id: 'ad_6_8_6', name: 'Add Unit Management', parentModule: 'ad_6_8' },
-                          
+
                           { _id: 'ad_6_9', name: 'ComboKit', parentModule: 'ad_6' },
                           { _id: 'ad_6_9_1', name: 'Create Solarkit', parentModule: 'ad_6_9' },
                           { _id: 'ad_6_9_2', name: 'Create AMC Plans', parentModule: 'ad_6_9' },
@@ -1382,7 +1399,7 @@ export default function PanelsLevelWise() {
                           { _id: 'ad_6_9_5', name: 'Add ComboKit', parentModule: 'ad_6_9' },
                           { _id: 'ad_6_9_6', name: 'Customize Combokit', parentModule: 'ad_6_9' },
                           { _id: 'ad_6_9_7', name: 'Combokit Overview', parentModule: 'ad_6_9' },
-                          
+
                           { _id: 'ad_6_10', name: 'Partner Settings', parentModule: 'ad_6' },
                           { _id: 'ad_6_10_1', name: 'Partner Plans', parentModule: 'ad_6_10' },
                           { _id: 'ad_6_10_2', name: 'Partner Points & Reward Setting', parentModule: 'ad_6_10' },
@@ -1391,21 +1408,21 @@ export default function PanelsLevelWise() {
                           { _id: 'ad_6_10_5', name: 'Add Partner', parentModule: 'ad_6_10' },
                           { _id: 'ad_6_10_6', name: 'Partner Manager Setting', parentModule: 'ad_6_10' },
                           { _id: 'ad_6_10_7', name: 'Partner Buy Lead Setting', parentModule: 'ad_6_10' },
-                          
+
                           { _id: 'ad_6_11', name: 'HRMS Settings', parentModule: 'ad_6' },
                           { _id: 'ad_6_11_1', name: 'HRMS Settings', parentModule: 'ad_6_11' },
                           { _id: 'ad_6_11_2', name: 'Vacancy Module', parentModule: 'ad_6_11' },
                           { _id: 'ad_6_11_3', name: 'Candidates List', parentModule: 'ad_6_11' },
                           { _id: 'ad_6_11_4', name: 'Candidate Test Setting', parentModule: 'ad_6_11' },
                           { _id: 'ad_6_11_5', name: 'Candidate Training Setting', parentModule: 'ad_6_11' },
-                          
+
                           { _id: 'ad_6_12', name: 'Project Management Settings', parentModule: 'ad_6' },
                           { _id: 'ad_6_12_1', name: 'Project Journey Stage Setting', parentModule: 'ad_6_12' },
                           { _id: 'ad_6_12_2', name: 'Project Management Overdue Setting', parentModule: 'ad_6_12' },
                           { _id: 'ad_6_12_3', name: 'Project Management Configuration', parentModule: 'ad_6_12' },
                           { _id: 'ad_6_12_4', name: 'Project Documentation Setting', parentModule: 'ad_6_12' },
                           { _id: 'ad_6_12_5', name: 'Placeholder Name Setting', parentModule: 'ad_6_12' },
-                          
+
                           { _id: 'ad_6_13', name: 'Quote', parentModule: 'ad_6' },
                           { _id: 'ad_6_13_1', name: 'Quote Setting', parentModule: 'ad_6_13' },
                           { _id: 'ad_6_13_2', name: 'Survey BOM Setting', parentModule: 'ad_6_13' },
@@ -1413,12 +1430,12 @@ export default function PanelsLevelWise() {
                           { _id: 'ad_6_13_4', name: 'Structure Setting', parentModule: 'ad_6_13' },
                           { _id: 'ad_6_13_5', name: 'Building Setting', parentModule: 'ad_6_13' },
                           { _id: 'ad_6_13_6', name: 'Discom Master', parentModule: 'ad_6_13' },
-                          
+
                           { _id: 'ad_6_14', name: 'Overdue Setting', parentModule: 'ad_6' },
                           { _id: 'ad_6_14_1', name: 'Approval Overdue Setting', parentModule: 'ad_6_14' },
                           { _id: 'ad_6_14_2', name: 'Overdue Task Setting', parentModule: 'ad_6_14' },
                           { _id: 'ad_6_14_3', name: 'Overdue Status Setting', parentModule: 'ad_6_14' },
-                          
+
                           { _id: 'ad_6_15', name: 'Loan Setting', parentModule: 'ad_6' },
                           { _id: 'ad_6_16', name: 'Checklist Setting', parentModule: 'ad_6' },
 
@@ -1441,145 +1458,145 @@ export default function PanelsLevelWise() {
                       }
 
                       return (
-                      <div
-                        key={panel._id}
-                        className="flex flex-col sm:flex-row justify-between items-start p-4 rounded-xl border border-slate-150 bg-slate-50 hover:bg-slate-100 hover:border-slate-300 transition gap-4"
-                      >
-                        <div className="flex-1 w-full">
-                          <div className="flex items-center gap-2">
-                            <span className="font-extrabold text-slate-800 text-base">{formatPanelName(panel.name)}</span>
-                            <span className="bg-blue-100 text-blue-700 px-2 py-0.5 text-[10px] font-bold rounded uppercase tracking-wider">
-                              {panel.key}
-                            </span>
-                            <span className="bg-emerald-100 text-emerald-700 px-2 py-0.5 text-[10px] font-bold rounded uppercase tracking-wider">
-                              {panel.level || 'Country'} Level
-                            </span>
-                          </div>
-                          <div className="mt-4">
-                            <p className="text-xs font-bold text-slate-600 mb-2">Modules Overview:</p>
-                            <div className="w-full">
-                              {(() => {
-                                if (displayModules.length === 0) {
-                                  return <span className="text-xs text-slate-400 italic">No modules assigned</span>;
-                                }
-
-                                const moduleIds = new Set(displayModules.map(m => m._id));
-                                const roots = [];
-                                const childrenMap = {};
-                                
-                                displayModules.forEach(m => {
-                                  let parentId = m.parentModule;
-                                  if (typeof parentId === 'object' && parentId !== null) {
-                                    parentId = parentId._id;
+                        <div
+                          key={panel._id}
+                          className="flex flex-col sm:flex-row justify-between items-start p-4 rounded-xl border border-slate-150 bg-slate-50 hover:bg-slate-100 hover:border-slate-300 transition gap-4"
+                        >
+                          <div className="flex-1 w-full">
+                            <div className="flex items-center gap-2">
+                              <span className="font-extrabold text-slate-800 text-base">{formatPanelName(panel.name)}</span>
+                              <span className="bg-blue-100 text-blue-700 px-2 py-0.5 text-[10px] font-bold rounded uppercase tracking-wider">
+                                {panel.key}
+                              </span>
+                              <span className="bg-emerald-100 text-emerald-700 px-2 py-0.5 text-[10px] font-bold rounded uppercase tracking-wider">
+                                {panel.level || 'Country'} Level
+                              </span>
+                            </div>
+                            <div className="mt-4">
+                              <p className="text-xs font-bold text-slate-600 mb-2">Modules Overview:</p>
+                              <div className="w-full">
+                                {(() => {
+                                  if (displayModules.length === 0) {
+                                    return <span className="text-xs text-slate-400 italic">No modules assigned</span>;
                                   }
-                                  
-                                  if (parentId && moduleIds.has(parentId)) {
-                                    if (!childrenMap[parentId]) childrenMap[parentId] = [];
-                                    childrenMap[parentId].push(m);
-                                  } else {
-                                    roots.push(m);
-                                  }
-                                });
 
-                                const renderTree = (nodes) => {
-                                  return nodes.map(node => {
-                                    const children = childrenMap[node._id];
-                                    const hasChildren = children && children.length > 0;
-                                    
-                                    if (!hasChildren) {
-                                      return (
-                                        <div key={node._id} className="text-[11px] font-semibold text-slate-600 py-0.5 flex items-center before:content-[''] before:w-1 before:h-1 before:bg-slate-400 before:rounded-full before:mr-2">
-                                          {node.name}
-                                        </div>
-                                      );
+                                  const moduleIds = new Set(displayModules.map(m => m._id));
+                                  const roots = [];
+                                  const childrenMap = {};
+
+                                  displayModules.forEach(m => {
+                                    let parentId = m.parentModule;
+                                    if (typeof parentId === 'object' && parentId !== null) {
+                                      parentId = parentId._id;
                                     }
 
-                                    return (
-                                      <details key={node._id} className="group/sub mb-1 mt-1 first:mt-0 last:mb-0">
-                                        <summary className="flex items-center gap-1.5 cursor-pointer py-0.5 list-none [&::-webkit-details-marker]:hidden select-none hover:text-blue-600">
-                                          <span className="text-slate-400 group-open/sub:rotate-90 transition-transform text-[8px] mt-[1px]">▶</span>
-                                          <span className="text-[11px] font-bold text-slate-700 group-hover/sub:text-blue-600 transition-colors">{node.name}</span>
-                                          <span className="text-[9px] bg-blue-100/50 text-blue-600 px-1 rounded-sm ml-auto font-bold">{children.length}</span>
-                                        </summary>
-                                        <div className="pl-3.5 ml-1 border-l border-slate-200 flex flex-col gap-0.5 mt-1 mb-1">
-                                          {renderTree(children)}
-                                        </div>
-                                      </details>
-                                    );
+                                    if (parentId && moduleIds.has(parentId)) {
+                                      if (!childrenMap[parentId]) childrenMap[parentId] = [];
+                                      childrenMap[parentId].push(m);
+                                    } else {
+                                      roots.push(m);
+                                    }
                                   });
-                                };
 
-                                return (
-                                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-                                    {roots.map(root => {
-                                      const hasChildren = childrenMap[root._id] && childrenMap[root._id].length > 0;
-                                      
+                                  const renderTree = (nodes) => {
+                                    return nodes.map(node => {
+                                      const children = childrenMap[node._id];
+                                      const hasChildren = children && children.length > 0;
+
                                       if (!hasChildren) {
                                         return (
-                                          <div key={root._id} className="flex items-center justify-between p-2.5 bg-white border border-slate-200 rounded-lg shadow-sm">
-                                            <span className="font-bold text-xs text-slate-700">{root.name}</span>
+                                          <div key={node._id} className="text-[11px] font-semibold text-slate-600 py-0.5 flex items-center before:content-[''] before:w-1 before:h-1 before:bg-slate-400 before:rounded-full before:mr-2">
+                                            {node.name}
                                           </div>
                                         );
                                       }
 
                                       return (
-                                        <details key={root._id} className="group bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden h-fit">
-                                          <summary className="flex items-center justify-between p-2.5 cursor-pointer hover:bg-slate-50 transition-colors list-none [&::-webkit-details-marker]:hidden select-none">
-                                            <div className="flex items-center gap-2">
-                                              <span className="text-slate-400 group-open:rotate-90 transition-transform text-[10px]">▶</span>
-                                              <span className="font-bold text-xs text-slate-700">{root.name}</span>
-                                            </div>
-                                            <span className="text-[10px] bg-blue-50 border border-blue-100 text-blue-700 px-1.5 py-0.5 rounded font-bold">
-                                              {childrenMap[root._id].length} sub
-                                            </span>
+                                        <details key={node._id} className="group/sub mb-1 mt-1 first:mt-0 last:mb-0">
+                                          <summary className="flex items-center gap-1.5 cursor-pointer py-0.5 list-none [&::-webkit-details-marker]:hidden select-none hover:text-blue-600">
+                                            <span className="text-slate-400 group-open/sub:rotate-90 transition-transform text-[8px] mt-[1px]">▶</span>
+                                            <span className="text-[11px] font-bold text-slate-700 group-hover/sub:text-blue-600 transition-colors">{node.name}</span>
+                                            <span className="text-[9px] bg-blue-100/50 text-blue-600 px-1 rounded-sm ml-auto font-bold">{children.length}</span>
                                           </summary>
-                                          <div className="p-2 border-t border-slate-100 bg-slate-50 flex flex-col gap-1 pl-4">
-                                            {renderTree(childrenMap[root._id])}
+                                          <div className="pl-3.5 ml-1 border-l border-slate-200 flex flex-col gap-0.5 mt-1 mb-1">
+                                            {renderTree(children)}
                                           </div>
                                         </details>
                                       );
-                                    })}
-                                  </div>
-                                );
-                              })()}
+                                    });
+                                  };
+
+                                  return (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+                                      {roots.map(root => {
+                                        const hasChildren = childrenMap[root._id] && childrenMap[root._id].length > 0;
+
+                                        if (!hasChildren) {
+                                          return (
+                                            <div key={root._id} className="flex items-center justify-between p-2.5 bg-white border border-slate-200 rounded-lg shadow-sm">
+                                              <span className="font-bold text-xs text-slate-700">{root.name}</span>
+                                            </div>
+                                          );
+                                        }
+
+                                        return (
+                                          <details key={root._id} className="group bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden h-fit">
+                                            <summary className="flex items-center justify-between p-2.5 cursor-pointer hover:bg-slate-50 transition-colors list-none [&::-webkit-details-marker]:hidden select-none">
+                                              <div className="flex items-center gap-2">
+                                                <span className="text-slate-400 group-open:rotate-90 transition-transform text-[10px]">▶</span>
+                                                <span className="font-bold text-xs text-slate-700">{root.name}</span>
+                                              </div>
+                                              <span className="text-[10px] bg-blue-50 border border-blue-100 text-blue-700 px-1.5 py-0.5 rounded font-bold">
+                                                {childrenMap[root._id].length} sub
+                                              </span>
+                                            </summary>
+                                            <div className="p-2 border-t border-slate-100 bg-slate-50 flex flex-col gap-1 pl-4">
+                                              {renderTree(childrenMap[root._id])}
+                                            </div>
+                                          </details>
+                                        );
+                                      })}
+                                    </div>
+                                  );
+                                })()}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        <div className="flex items-center gap-1 sm:self-center">
-                          {/* Clone Button */}
-                          <button
-                            onClick={() =>
-                              setCloningPanel({
-                                sourcePanelId: panel._id,
-                                targetName: '',
-                                targetLevel: panel.level || 'Country',
-                              })
-                            }
-                            className="p-2 hover:bg-white text-blue-600 rounded-lg hover:shadow-sm border border-transparent hover:border-slate-200 transition"
-                            title="Clone Panel Rights"
-                          >
-                            <Copy size={16} />
-                          </button>
-                          {/* Edit Trigger */}
-                          <button
-                            onClick={() => setEditingPanel(panel)}
-                            className="p-2 hover:bg-white text-amber-600 rounded-lg hover:shadow-sm border border-transparent hover:border-slate-200 transition"
-                            title="Edit Details"
-                          >
-                            <Edit2 size={16} />
-                          </button>
-                          {/* Delete Trigger */}
-                          {panel.key !== 'admin' && (
+                          <div className="flex items-center gap-1 sm:self-center">
+                            {/* Clone Button */}
                             <button
-                              onClick={() => handleDeletePanel(panel._id)}
-                              className="p-2 hover:bg-white text-rose-600 rounded-lg hover:shadow-sm border border-transparent hover:border-slate-200 transition"
-                              title="Delete Panel"
+                              onClick={() =>
+                                setCloningPanel({
+                                  sourcePanelId: panel._id,
+                                  targetName: '',
+                                  targetLevel: panel.level || 'Country',
+                                })
+                              }
+                              className="p-2 hover:bg-white text-blue-600 rounded-lg hover:shadow-sm border border-transparent hover:border-slate-200 transition"
+                              title="Clone Panel Rights"
                             >
-                              <Trash2 size={16} />
+                              <Copy size={16} />
                             </button>
-                          )}
+                            {/* Edit Trigger */}
+                            <button
+                              onClick={() => setEditingPanel(panel)}
+                              className="p-2 hover:bg-white text-amber-600 rounded-lg hover:shadow-sm border border-transparent hover:border-slate-200 transition"
+                              title="Edit Details"
+                            >
+                              <Edit2 size={16} />
+                            </button>
+                            {/* Delete Trigger */}
+                            {panel.key !== 'admin' && (
+                              <button
+                                onClick={() => handleDeletePanel(panel._id)}
+                                className="p-2 hover:bg-white text-rose-600 rounded-lg hover:shadow-sm border border-transparent hover:border-slate-200 transition"
+                                title="Delete Panel"
+                              >
+                                <Trash2 size={16} />
+                              </button>
+                            )}
+                          </div>
                         </div>
-                      </div>
                       );
                     })}
                   </div>
@@ -1605,22 +1622,20 @@ export default function PanelsLevelWise() {
                       <button
                         type="button"
                         onClick={() => setModuleForm({ ...moduleForm, moduleType: 'parent', parentModule: '' })}
-                        className={`py-2 rounded-xl text-xs font-bold border transition ${
-                          moduleForm.moduleType === 'parent'
+                        className={`py-2 rounded-xl text-xs font-bold border transition ${moduleForm.moduleType === 'parent'
                             ? 'bg-blue-50 border-blue-600 text-blue-700 shadow-sm'
                             : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
-                        }`}
+                          }`}
                       >
                         Main Module (Parent)
                       </button>
                       <button
                         type="button"
                         onClick={() => setModuleForm({ ...moduleForm, moduleType: 'submodule' })}
-                        className={`py-2 rounded-xl text-xs font-bold border transition ${
-                          moduleForm.moduleType === 'submodule'
+                        className={`py-2 rounded-xl text-xs font-bold border transition ${moduleForm.moduleType === 'submodule'
                             ? 'bg-blue-50 border-blue-600 text-blue-700 shadow-sm'
                             : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
-                        }`}
+                          }`}
                       >
                         Submodule (Child)
                       </button>
@@ -1665,9 +1680,9 @@ export default function PanelsLevelWise() {
                           if (!moduleForm.panelId) return null;
                           const selectedPanel = panels.find(p => p._id === moduleForm.panelId);
                           const staticList = selectedPanel ? getStaticModulesForPanelName(selectedPanel.name).filter(sm => !sm.parentModule) : [];
-                          
+
                           const options = [];
-                          
+
                           // Add static modules for the selected panel, checking if they exist in DB
                           staticList.forEach(sm => {
                             const dbModule = modules.find(m => !m.parentModule && m.name === sm.name);
@@ -1683,7 +1698,7 @@ export default function PanelsLevelWise() {
                             const perm = matrixState[`${moduleForm.panelId}_${m._id}`];
                             const hasExplicitPerm = perm && (perm.can_view || perm.can_add || perm.can_edit || perm.can_delete);
                             const isAlreadyInOptions = options.some(opt => opt.name === m.name);
-                            
+
                             if (hasExplicitPerm && !isAlreadyInOptions) {
                               options.push(m);
                             }
@@ -1786,7 +1801,7 @@ export default function PanelsLevelWise() {
                     {panels.map((panel) => {
                       let displayModules = [];
                       const pName = panel.name.toLowerCase();
-                      
+
                       if (pName.includes('account')) {
                         displayModules = [
                           { _id: 'am_1', name: 'Dashboard' },
@@ -1858,12 +1873,12 @@ export default function PanelsLevelWise() {
                           { _id: 'ad_1_6', name: 'Inventory', parentModule: 'ad_1' },
                           { _id: 'ad_1_7', name: 'Vendors', parentModule: 'ad_1' },
                           { _id: 'ad_1_8', name: 'Project Report', parentModule: 'ad_1' },
-                          
+
                           { _id: 'ad_2', name: 'Departments' },
                           { _id: 'ad_2_1', name: 'Organization chart', parentModule: 'ad_2' },
-                          
+
                           { _id: 'ad_3', name: 'Approvals' },
-                          
+
                           { _id: 'ad_4', name: 'Project Management' },
                           { _id: 'ad_4_1', name: 'Company', parentModule: 'ad_4' },
                           { _id: 'ad_4_1_1', name: 'Management', parentModule: 'ad_4_1' },
@@ -1892,7 +1907,7 @@ export default function PanelsLevelWise() {
                           { _id: 'ad_6', name: 'Settings' },
                           { _id: 'ad_6_1', name: 'Location Settings', parentModule: 'ad_6' },
                           { _id: 'ad_6_1_1', name: 'Setup Locations', parentModule: 'ad_6_1' },
-                          
+
                           { _id: 'ad_6_2', name: 'HR Settings', parentModule: 'ad_6' },
                           { _id: 'ad_6_2_1', name: 'Role Settings', parentModule: 'ad_6_2' },
                           { _id: 'ad_6_2_2', name: 'Create Department', parentModule: 'ad_6_2' },
@@ -1901,21 +1916,21 @@ export default function PanelsLevelWise() {
                           { _id: 'ad_6_2_5', name: 'Temporary Incharge Setting', parentModule: 'ad_6_2' },
                           { _id: 'ad_6_2_6', name: 'Leave Approvals', parentModule: 'ad_6_2' },
                           { _id: 'ad_6_2_7', name: 'Resign Approvals', parentModule: 'ad_6_2' },
-                          
+
                           { _id: 'ad_6_3', name: 'Vendor Settings', parentModule: 'ad_6' },
                           { _id: 'ad_6_3_1', name: 'Installer Vendors', parentModule: 'ad_6_3' },
                           { _id: 'ad_6_3_2', name: 'Supplier Type', parentModule: 'ad_6_3' },
                           { _id: 'ad_6_3_3', name: 'Supplier Vendors', parentModule: 'ad_6_3' },
-                          
+
                           { _id: 'ad_6_4', name: 'Sales Settings', parentModule: 'ad_6' },
                           { _id: 'ad_6_4_1', name: 'Set Price', parentModule: 'ad_6_4' },
                           { _id: 'ad_6_4_2', name: 'Set Price For AMC', parentModule: 'ad_6_4' },
                           { _id: 'ad_6_4_3', name: 'Offers', parentModule: 'ad_6_4' },
                           { _id: 'ad_6_4_4', name: 'Solar Panel Bundle Setting', parentModule: 'ad_6_4' },
-                          
+
                           { _id: 'ad_6_5', name: 'Marketing Settings', parentModule: 'ad_6' },
                           { _id: 'ad_6_5_1', name: 'Campaign Management', parentModule: 'ad_6_5' },
-                          
+
                           { _id: 'ad_6_6', name: 'Settings Operations', parentModule: 'ad_6' },
                           { _id: 'ad_6_6_1', name: 'Delivery Settings', parentModule: 'ad_6_6' },
                           { _id: 'ad_6_6_1_1', name: 'Delivery Type', parentModule: 'ad_6_6_1' },
@@ -1927,13 +1942,13 @@ export default function PanelsLevelWise() {
                           { _id: 'ad_6_6_2_3', name: 'Combokit Brand Overview', parentModule: 'ad_6_6_2' },
                           { _id: 'ad_6_6_3', name: 'Order Procurement', parentModule: 'ad_6_6' },
                           { _id: 'ad_6_6_3_1', name: 'Order Procurement', parentModule: 'ad_6_6_3' },
-                          
+
                           { _id: 'ad_6_7', name: 'Installer Settings', parentModule: 'ad_6' },
                           { _id: 'ad_6_7_1', name: 'Solar Installer', parentModule: 'ad_6_7' },
                           { _id: 'ad_6_7_2', name: 'Installer Tool Requirements', parentModule: 'ad_6_7' },
                           { _id: 'ad_6_7_3', name: 'Rating Setting', parentModule: 'ad_6_7' },
                           { _id: 'ad_6_7_4', name: 'Installer Agency Plans', parentModule: 'ad_6_7' },
-                          
+
                           { _id: 'ad_6_8', name: 'Product Configuration', parentModule: 'ad_6' },
                           { _id: 'ad_6_8_1', name: 'Add Project Type', parentModule: 'ad_6_8' },
                           { _id: 'ad_6_8_2', name: 'Add Project Category', parentModule: 'ad_6_8' },
@@ -1941,7 +1956,7 @@ export default function PanelsLevelWise() {
                           { _id: 'ad_6_8_4', name: 'SKU', parentModule: 'ad_6_8' },
                           { _id: 'ad_6_8_5', name: 'Price Master', parentModule: 'ad_6_8' },
                           { _id: 'ad_6_8_6', name: 'Add Unit Management', parentModule: 'ad_6_8' },
-                          
+
                           { _id: 'ad_6_9', name: 'ComboKit', parentModule: 'ad_6' },
                           { _id: 'ad_6_9_1', name: 'Create Solarkit', parentModule: 'ad_6_9' },
                           { _id: 'ad_6_9_2', name: 'Create AMC Plans', parentModule: 'ad_6_9' },
@@ -1950,7 +1965,7 @@ export default function PanelsLevelWise() {
                           { _id: 'ad_6_9_5', name: 'Add ComboKit', parentModule: 'ad_6_9' },
                           { _id: 'ad_6_9_6', name: 'Customize Combokit', parentModule: 'ad_6_9' },
                           { _id: 'ad_6_9_7', name: 'Combokit Overview', parentModule: 'ad_6_9' },
-                          
+
                           { _id: 'ad_6_10', name: 'Partner Settings', parentModule: 'ad_6' },
                           { _id: 'ad_6_10_1', name: 'Partner Plans', parentModule: 'ad_6_10' },
                           { _id: 'ad_6_10_2', name: 'Partner Points & Reward Setting', parentModule: 'ad_6_10' },
@@ -1959,21 +1974,21 @@ export default function PanelsLevelWise() {
                           { _id: 'ad_6_10_5', name: 'Add Partner', parentModule: 'ad_6_10' },
                           { _id: 'ad_6_10_6', name: 'Partner Manager Setting', parentModule: 'ad_6_10' },
                           { _id: 'ad_6_10_7', name: 'Partner Buy Lead Setting', parentModule: 'ad_6_10' },
-                          
+
                           { _id: 'ad_6_11', name: 'HRMS Settings', parentModule: 'ad_6' },
                           { _id: 'ad_6_11_1', name: 'HRMS Settings', parentModule: 'ad_6_11' },
                           { _id: 'ad_6_11_2', name: 'Vacancy Module', parentModule: 'ad_6_11' },
                           { _id: 'ad_6_11_3', name: 'Candidates List', parentModule: 'ad_6_11' },
                           { _id: 'ad_6_11_4', name: 'Candidate Test Setting', parentModule: 'ad_6_11' },
                           { _id: 'ad_6_11_5', name: 'Candidate Training Setting', parentModule: 'ad_6_11' },
-                          
+
                           { _id: 'ad_6_12', name: 'Project Management Settings', parentModule: 'ad_6' },
                           { _id: 'ad_6_12_1', name: 'Project Journey Stage Setting', parentModule: 'ad_6_12' },
                           { _id: 'ad_6_12_2', name: 'Project Management Overdue Setting', parentModule: 'ad_6_12' },
                           { _id: 'ad_6_12_3', name: 'Project Management Configuration', parentModule: 'ad_6_12' },
                           { _id: 'ad_6_12_4', name: 'Project Documentation Setting', parentModule: 'ad_6_12' },
                           { _id: 'ad_6_12_5', name: 'Placeholder Name Setting', parentModule: 'ad_6_12' },
-                          
+
                           { _id: 'ad_6_13', name: 'Quote', parentModule: 'ad_6' },
                           { _id: 'ad_6_13_1', name: 'Quote Setting', parentModule: 'ad_6_13' },
                           { _id: 'ad_6_13_2', name: 'Survey BOM Setting', parentModule: 'ad_6_13' },
@@ -1981,12 +1996,12 @@ export default function PanelsLevelWise() {
                           { _id: 'ad_6_13_4', name: 'Structure Setting', parentModule: 'ad_6_13' },
                           { _id: 'ad_6_13_5', name: 'Building Setting', parentModule: 'ad_6_13' },
                           { _id: 'ad_6_13_6', name: 'Discom Master', parentModule: 'ad_6_13' },
-                          
+
                           { _id: 'ad_6_14', name: 'Overdue Setting', parentModule: 'ad_6' },
                           { _id: 'ad_6_14_1', name: 'Approval Overdue Setting', parentModule: 'ad_6_14' },
                           { _id: 'ad_6_14_2', name: 'Overdue Task Setting', parentModule: 'ad_6_14' },
                           { _id: 'ad_6_14_3', name: 'Overdue Status Setting', parentModule: 'ad_6_14' },
-                          
+
                           { _id: 'ad_6_15', name: 'Loan Setting', parentModule: 'ad_6' },
                           { _id: 'ad_6_16', name: 'Checklist Setting', parentModule: 'ad_6' },
 
@@ -2002,31 +2017,31 @@ export default function PanelsLevelWise() {
                           { _id: 'ad_7_9', name: 'City', parentModule: 'ad_7' },
                         ];
                       }
-                      
+
                       // Merge actual DB modules assigned to this panel
                       const dynamicModules = modules.filter(mod => {
                         const perm = matrixState[`${panel._id}_${mod._id}`];
                         return perm && (perm.can_view || perm.can_add || perm.can_edit || perm.can_delete);
                       });
-                      
+
                       const allDisplayModules = [...displayModules];
                       dynamicModules.forEach(dm => {
                         if (!allDisplayModules.find(am => am._id === dm._id)) {
                           allDisplayModules.push(dm);
                         }
                       });
-                      
+
                       if (allDisplayModules.length === 0) return null;
 
                       // Tree Processing
                       const moduleIds = new Set(allDisplayModules.map(m => m._id));
                       const roots = [];
                       const childrenMap = {};
-                      
+
                       allDisplayModules.forEach(m => {
                         let parentId = m.parentModule;
                         if (typeof parentId === 'object' && parentId !== null) parentId = parentId._id;
-                        
+
                         if (parentId && moduleIds.has(parentId)) {
                           if (!childrenMap[parentId]) childrenMap[parentId] = [];
                           childrenMap[parentId].push(m);
@@ -2039,9 +2054,9 @@ export default function PanelsLevelWise() {
                         return nodes.map(node => {
                           const children = childrenMap[node._id];
                           const hasChildren = children && children.length > 0;
-                          
+
                           // Only modules from the database have a key field
-                          const isRealModule = !!node.key; 
+                          const isRealModule = !!node.key;
 
                           const actionButtons = isRealModule ? (
                             <div className="flex gap-1 ml-auto mr-1 relative z-10">
@@ -2342,7 +2357,7 @@ export default function PanelsLevelWise() {
                     </tr>
                   </thead>
                   <tbody>
-                    {filteredUsers.map((user) => {
+                    {currentUsers.map((user) => {
                       const userMap = userPanels.find((up) => up.userId?._id === user._id || up.userId === user._id);
                       return (
                         <tr key={user._id} className="border-b border-slate-100 hover:bg-slate-50 transition">
@@ -2390,6 +2405,55 @@ export default function PanelsLevelWise() {
                   </tbody>
                 </table>
               </div>
+
+              {/* Pagination Controls */}
+              {totalUserPages > 1 && (
+                <div className="flex justify-between items-center mt-6">
+                  <div className="text-sm text-slate-500 font-semibold">
+                    Showing {indexOfFirstUser + 1} to {Math.min(indexOfLastUser, sortedUsers.length)} of {sortedUsers.length} users
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => setUserCurrentPage(prev => Math.max(prev - 1, 1))}
+                      disabled={userCurrentPage === 1}
+                      className="px-3 py-1.5 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 disabled:opacity-50 font-semibold transition"
+                    >
+                      Previous
+                    </button>
+                    {Array.from({ length: totalUserPages }, (_, i) => {
+                      // Show only max 5 page buttons to prevent overflow, center around current page
+                      const pageNum = i + 1;
+                      const isNear = Math.abs(pageNum - userCurrentPage) <= 2;
+                      const isEnd = pageNum === 1 || pageNum === totalUserPages;
+
+                      if (!isNear && !isEnd) {
+                        if (pageNum === 2 || pageNum === totalUserPages - 1) return <span key={pageNum} className="px-2 py-1.5 text-slate-400">...</span>;
+                        return null;
+                      }
+
+                      return (
+                        <button
+                          key={pageNum}
+                          onClick={() => setUserCurrentPage(pageNum)}
+                          className={`px-3 py-1.5 rounded-lg border font-semibold transition ${userCurrentPage === pageNum
+                              ? 'bg-blue-600 text-white border-blue-600'
+                              : 'border-slate-200 text-slate-600 hover:bg-slate-50'
+                            }`}
+                        >
+                          {pageNum}
+                        </button>
+                      );
+                    })}
+                    <button
+                      onClick={() => setUserCurrentPage(prev => Math.min(prev + 1, totalUserPages))}
+                      disabled={userCurrentPage === totalUserPages}
+                      className="px-3 py-1.5 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 disabled:opacity-50 font-semibold transition"
+                    >
+                      Next
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
@@ -2593,22 +2657,20 @@ export default function PanelsLevelWise() {
                   <button
                     type="button"
                     onClick={() => setEditingModule({ ...editingModule, moduleType: 'parent', parentModule: '' })}
-                    className={`py-2 rounded-xl text-xs font-bold border transition ${
-                      editingModule.moduleType === 'parent'
+                    className={`py-2 rounded-xl text-xs font-bold border transition ${editingModule.moduleType === 'parent'
                         ? 'bg-blue-50 border-blue-600 text-blue-700 shadow-sm font-semibold'
                         : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
-                    }`}
+                      }`}
                   >
                     Main Module (Parent)
                   </button>
                   <button
                     type="button"
                     onClick={() => setEditingModule({ ...editingModule, moduleType: 'submodule' })}
-                    className={`py-2 rounded-xl text-xs font-bold border transition ${
-                      editingModule.moduleType === 'submodule'
+                    className={`py-2 rounded-xl text-xs font-bold border transition ${editingModule.moduleType === 'submodule'
                         ? 'bg-blue-50 border-blue-600 text-blue-700 shadow-sm font-semibold'
                         : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
-                    }`}
+                      }`}
                   >
                     Submodule (Child)
                   </button>
@@ -2786,9 +2848,8 @@ export default function PanelsLevelWise() {
                         return (
                           <tr
                             key={mod._id}
-                            className={`border-b border-slate-150 hover:bg-slate-50/70 transition ${
-                              mod.isSubmodule ? 'bg-slate-50/40 font-normal' : 'bg-slate-100/50 font-bold'
-                            }`}
+                            className={`border-b border-slate-150 hover:bg-slate-50/70 transition ${mod.isSubmodule ? 'bg-slate-50/40 font-normal' : 'bg-slate-100/50 font-bold'
+                              }`}
                           >
                             <td className="py-3 px-4 text-slate-800 text-xs">
                               {mod.isSubmodule && <span className="text-slate-400 mr-1.5">↳</span>}
@@ -2803,13 +2864,12 @@ export default function PanelsLevelWise() {
                                   <button
                                     type="button"
                                     onClick={() => handleToggleUserOverride(mod._id, actField, val)}
-                                    className={`w-8 h-8 rounded-lg flex items-center justify-center border font-extrabold text-xs transition-all ${
-                                      val === true
+                                    className={`w-8 h-8 rounded-lg flex items-center justify-center border font-extrabold text-xs transition-all ${val === true
                                         ? 'bg-emerald-600 border-emerald-600 text-white shadow-sm'
                                         : val === false
-                                        ? 'bg-rose-600 border-rose-600 text-white shadow-sm'
-                                        : 'bg-white border-slate-200 text-slate-400 hover:border-slate-350'
-                                    }`}
+                                          ? 'bg-rose-600 border-rose-600 text-white shadow-sm'
+                                          : 'bg-white border-slate-200 text-slate-400 hover:border-slate-350'
+                                      }`}
                                   >
                                     {val === true ? '✓' : val === false ? '✗' : '-'}
                                   </button>
@@ -2845,7 +2905,7 @@ export default function PanelsLevelWise() {
         </div>
       )}
 
-      <AddNewCompanyUserModal 
+      <AddNewCompanyUserModal
         isOpen={showAddUserModal}
         onClose={() => setShowAddUserModal(false)}
       />

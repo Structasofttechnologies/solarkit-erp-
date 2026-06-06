@@ -11,6 +11,8 @@ import District from '../../models/core/District.js';
 import DealerPlan from '../../models/dealer/DealerPlan.js';
 import FranchiseePlan from '../../models/franchisee/FranchiseePlan.js';
 import ChannelPartnerPlan from '../../models/finance/ChannelPartnerPlan.js';
+import BrandManufacturer from '../../models/inventory/BrandManufacturer.js';
+import SKU from '../../models/inventory/SKU.js';
 
 export const getPlansByRole = async (req, res) => {
     try {
@@ -407,12 +409,37 @@ export const updateAssignment = async (req, res) => {
         if (req.body.comboKits && Array.isArray(req.body.comboKits)) {
             req.body.comboKits = req.body.comboKits.map(kit => {
                 const newKit = { ...kit };
-                // If id is present and not a valid 24-char hex ObjectId, remove it
                 if (newKit.id && !/^[0-9a-fA-F]{24}$/.test(newKit.id)) {
                     delete newKit.id;
                 }
                 return newKit;
             });
+
+            // --- Auto-resolve brandName, technology, panelWatt from comboKits ---
+            const firstKit = req.body.comboKits[0];
+            if (firstKit?.panelBrand) {
+                // Resolve brand name from BrandManufacturer
+                const brand = await BrandManufacturer.findOne({
+                    $or: [
+                        { companyName: { $regex: new RegExp(`^${firstKit.panelBrand}$`, 'i') } },
+                        { brand: { $regex: new RegExp(`^${firstKit.panelBrand}$`, 'i') } }
+                    ]
+                }).lean();
+
+                req.body.brandName = brand?.companyName || firstKit.panelBrand;
+
+                // Resolve technology and panelWatt from first panel SKU
+                if (firstKit.panelSkus?.length > 0) {
+                    const sku = await SKU.findOne({
+                        skuCode: { $in: firstKit.panelSkus }
+                    }).lean();
+
+                    if (sku) {
+                        if (sku.technology) req.body.technology = sku.technology;
+                        if (sku.wattage) req.body.panelWatt = sku.wattage;
+                    }
+                }
+            }
         }
 
         const updatedAssignment = await ComboKitAssignment.findByIdAndUpdate(req.params.id, req.body, { new: true });

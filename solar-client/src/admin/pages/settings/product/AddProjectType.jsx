@@ -36,7 +36,8 @@ const AddProjectType = () => {
             name: item.name, 
             type,
             ...(type === 'subCat' ? { categoryId: item.categoryId?._id || item.category?._id || item.categoryId || '' } : {}),
-            ...(type === 'pt' ? { subCategoryId: item.subCategoryId?._id || item.subCategory?._id || item.subCategoryId || '' } : {})
+            ...(type === 'pt' ? { subCategoryId: item.subCategoryId?._id || item.subCategory?._id || item.subCategoryId || '' } : {}),
+            ...(type === 'subPT' ? { projectTypeId: item.projectTypeId?._id || item.projectType?._id || item.projectTypeId || '' } : {})
         });
     };
 
@@ -60,7 +61,11 @@ const AddProjectType = () => {
                 });
             } else if (editingItem.type === 'subPT') {
                 const item = subProjectTypes.find(c => c._id === editingItem.id);
-                await productApi.updateSubProjectType(editingItem.id, { ...item, name: editingItem.name.trim() });
+                await productApi.updateSubProjectType(editingItem.id, { 
+                    ...item, 
+                    name: editingItem.name.trim(),
+                    projectTypeId: editingItem.projectTypeId 
+                });
             } else if (editingItem.type === 'pt') {
                 const item = projectTypes.find(c => c._id === editingItem.id);
                 await productApi.updateProjectType(editingItem.id, { 
@@ -69,7 +74,7 @@ const AddProjectType = () => {
                     subCategoryId: editingItem.subCategoryId 
                 });
             }
-            showToast("Item updated successfully");
+            showToast("Updated successfully");
             setEditingItem(null);
             fetchInitialData();
         } catch (err) {
@@ -90,20 +95,20 @@ const AddProjectType = () => {
     const fetchInitialData = async () => {
         try {
             setLoading(true);
-            const [catRes, subCatRes, pTypeRes, subPTypeRes] = await Promise.all([
+            const [catRes, subPTypeRes, pTypeRes, subCatRes] = await Promise.all([
                 productApi.getCategories(),
-                productApi.getSubCategories(),
+                productApi.getSubProjectTypes(),
                 productApi.getProjectTypes(),
-                productApi.getSubProjectTypes()
+                productApi.getSubCategories()
             ]);
 
             const cats = catRes?.data?.data || [];
             const pts = pTypeRes?.data?.data || [];
 
             setCategories(cats);
-            setSubCategories(subCatRes?.data?.data || []);
-            setProjectTypes(pts);
             setSubProjectTypes(subPTypeRes?.data?.data || []);
+            setProjectTypes(pTypeRes?.data?.data || []);
+            setSubCategories(subCatRes?.data?.data || []);
 
             // Set initial dropdown values if available
             if (pts.length > 0) {
@@ -226,7 +231,7 @@ const AddProjectType = () => {
 
                 <div className="p-6">
                     {/* Input Sections */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 mb-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6 mb-8">
                         {/* Category */}
                         <div>
                             <div className="flex justify-between items-center mb-1">
@@ -317,6 +322,16 @@ const AddProjectType = () => {
                         <div>
                             <div className="flex justify-between items-center mb-1">
                                 <h3 className="text-[#0073B7] font-bold text-[15px]">Sub Project Type</h3>
+                                <div className="flex gap-1">
+                                    <select
+                                        className="text-xs border border-gray-200 rounded px-1 py-0.5 outline-none text-gray-500 bg-transparent"
+                                        value={selectedProjectTypeForSubPT}
+                                        onChange={(e) => setSelectedProjectTypeForSubPT(e.target.value)}
+                                    >
+                                        <option value="">Project Type</option>
+                                        {projectTypes.map(c => <option key={c._id} value={c._id}>{c.name}</option>)}
+                                    </select>
+                                </div>
                             </div>
                             <div className="flex h-10">
                                 <input
@@ -552,18 +567,36 @@ const AddProjectType = () => {
                                     subProjectTypes.map((item, idx) => (
                                         <div key={item._id} className="flex justify-between items-center py-2.5 border-b border-gray-100 last:border-0 border-dashed">
                                             {editingItem?.id === item._id && editingItem?.type === 'subPT' ? (
-                                                <div className="flex-1 flex items-center gap-2 mr-4">
-                                                    <span className="text-sm text-gray-800">{idx + 1}.</span>
-                                                    <input 
-                                                        type="text" 
-                                                        className="flex-1 border border-[#FFC107] rounded px-2 py-1 text-sm outline-none focus:border-[#E0A800]"
-                                                        value={editingItem.name}
-                                                        onChange={(e) => setEditingItem({ ...editingItem, name: e.target.value })}
-                                                        autoFocus
-                                                    />
+                                                <div className="flex-1 flex flex-col gap-2 mr-4">
+                                                    <div className="flex items-center gap-2">
+                                                        <span className="text-sm text-gray-800">{idx + 1}.</span>
+                                                        <input 
+                                                            type="text" 
+                                                            className="flex-1 border border-[#FFC107] rounded px-2 py-1 text-sm outline-none focus:border-[#E0A800]"
+                                                            value={editingItem.name}
+                                                            onChange={(e) => setEditingItem({ ...editingItem, name: e.target.value })}
+                                                            placeholder="Sub Project Type Name"
+                                                            autoFocus
+                                                        />
+                                                    </div>
+                                                    <div className="flex items-center gap-2 pl-4">
+                                                        <select
+                                                            className="flex-1 text-xs border border-gray-300 rounded px-2 py-1 outline-none focus:border-[#E0A800] bg-white"
+                                                            value={editingItem.projectTypeId || ''}
+                                                            onChange={(e) => setEditingItem({ ...editingItem, projectTypeId: e.target.value })}
+                                                        >
+                                                            <option value="">Select Project Type</option>
+                                                            {projectTypes.map(c => <option key={c._id} value={c._id}>{c.name}</option>)}
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             ) : (
-                                                <span className="text-sm text-gray-800">{idx + 1}. {item.name}</span>
+                                                <div className="flex flex-col">
+                                                    <span className="text-sm text-gray-800">{idx + 1}. {item.name}</span>
+                                                    {(item.projectTypeId?.name || item.projectType?.name) && (
+                                                        <span className="text-[10px] text-gray-500 pl-4 bg-gray-50 rounded mt-0.5 max-w-max px-1 border border-gray-100">{item.projectTypeId?.name || item.projectType?.name}</span>
+                                                    )}
+                                                </div>
                                             )}
                                             
                                             <div className="flex items-center gap-4">

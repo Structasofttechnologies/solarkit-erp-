@@ -16,6 +16,11 @@ const schema = new mongoose.Schema(
             ref: 'SubProjectType',
             required: false
         },
+        brandId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'BrandManufacturer',
+            required: false
+        },
         status: {
             type: Boolean,
             default: true

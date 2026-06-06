@@ -1032,7 +1032,7 @@ export default function SetPrice() {
                <h2 className="text-xl font-bold text-[#14233c] mb-4">Select Partner Type</h2>
                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   <LocationCard title="All Partners" subtitle="ALL" isSelected={selectedPartnerType === 'all'} onClick={() => setSelectedPartnerType('all')} />
-                  {partnerTypes?.filter((type, index, self) => 
+                  {(Array.isArray(partnerTypes) ? partnerTypes : [])?.filter((type, index, self) => 
                     index === self.findIndex((t) => t.name === type.name)
                   ).map(p => {
                     const filteredCount = allPricesForCount.filter(item => {

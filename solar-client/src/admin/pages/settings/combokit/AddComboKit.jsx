@@ -132,8 +132,9 @@ export default function AddComboKit() {
 
   const fetchPartners = async () => {
     try {
-      const data = await getPartnerTypes();
-      setPartners(data || []);
+      const res = await getPartnerTypes();
+      const fetchedPartners = Array.isArray(res) ? res : (res?.data || []);
+      setPartners(fetchedPartners);
     } catch (err) {
       console.error("Error fetching partners", err);
     }
@@ -1215,7 +1216,7 @@ export default function AddComboKit() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          {partners.map(p => {
+          {(Array.isArray(partners) ? partners : []).map(p => {
             const { configs, kits } = getItemKitCount('role', p.name);
             const isSelected = selectedRoles.includes(p.name);
             return (

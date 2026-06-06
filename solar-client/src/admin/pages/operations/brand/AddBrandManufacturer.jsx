@@ -472,25 +472,7 @@ const AddBrandManufacturer = () => {
               </div>
             </div>
 
-            {/* Product */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Product:
-              </label>
-              <select
-                name="product"
-                className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                value={form.product}
-                onChange={handleInputChange}
-              >
-                <option value="">-- Select Product --</option>
-                <option value="inverter">Inverter</option>
-                <option value="panel">Panel</option>
-                <option value="battery">Battery</option>
-                <option value="charge-controller">Charge Controller</option>
-                <option value="mounting-structure">Mounting Structure</option>
-              </select>
-            </div>
+
 
             {/* Combo Kit Toggle */}
             <div>
@@ -591,16 +573,6 @@ const AddBrandManufacturer = () => {
               onChange={(e) => setFilters({ ...filters, company: e.target.value })}
             />
           </div>
-          <div className="relative">
-            <Search className="absolute left-3 top-3 text-gray-400" size={20} />
-            <input
-              type="text"
-              placeholder="Search Product..."
-              className="w-full p-2 pl-10 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              value={filters.product}
-              onChange={(e) => setFilters({ ...filters, product: e.target.value })}
-            />
-          </div>
         </div>
 
         {/* Table */}
@@ -615,7 +587,6 @@ const AddBrandManufacturer = () => {
                 <th className="p-3 border-b text-sm font-semibold text-gray-600">City</th>
                 <th className="p-3 border-b text-sm font-semibold text-gray-600">District</th>
                 <th className="p-3 border-b text-sm font-semibold text-gray-600">Brand</th>
-                <th className="p-3 border-b text-sm font-semibold text-gray-600">Product</th>
                 <th className="p-3 border-b text-sm font-semibold text-gray-600">Combo Kit</th>
                 <th className="p-3 border-b text-sm font-semibold text-gray-600">Actions</th>
               </tr>
@@ -645,7 +616,6 @@ const AddBrandManufacturer = () => {
                     </td>
                     <td className="p-3 text-gray-600">{manufacturer.district?.name || '-'}</td>
                     <td className="p-3 text-gray-600">{manufacturer.brand}</td>
-                    <td className="p-3 uppercase text-gray-600 text-sm">{manufacturer.product}</td>
                     <td className="p-3">
                       <span className={`px-2 py-1 rounded-full text-xs font-medium ${manufacturer.comboKit ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-500'
                         }`}>

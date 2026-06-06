@@ -64,6 +64,27 @@ const comboKitAssignmentSchema = new mongoose.Schema({
         type: String,
         default: 'On Grid'
     },
+    // --- Fields for mobile app filtering ---
+    brandName: {
+        type: String,
+        default: ''
+    },
+    technology: {
+        type: String,
+        default: ''
+    },
+    panelWatt: {
+        type: Number,
+        default: null
+    },
+    numberOfPanels: {
+        type: Number,
+        default: null
+    },
+    capacityKW: {
+        type: Number,
+        default: null
+    },
     status: {
         type: String,
         enum: ['Active', 'Inactive'],

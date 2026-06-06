@@ -17,9 +17,13 @@ const GenerateSkuModal = ({ isOpen, onClose, product, onSuccess }) => {
   const [availableUnits, setAvailableUnits] = useState([]);
   const [skuPreview, setSkuPreview] = useState([]);
 
+  const [dbCapacities, setDbCapacities] = useState([]);
+  const [isAddingCapacity, setIsAddingCapacity] = useState(false);
+
   useEffect(() => {
     if (isOpen) {
       fetchUnits();
+      fetchDbCapacities();
     }
   }, [isOpen]);
 
@@ -39,6 +43,17 @@ const GenerateSkuModal = ({ isOpen, onClose, product, onSuccess }) => {
     }
   };
 
+  const fetchDbCapacities = async () => {
+    try {
+      const res = await productApi.getKilowatts();
+      if (res.data.success) {
+        setDbCapacities(res.data.data.map(k => k.name));
+      }
+    } catch (error) {
+      console.error("Error fetching capacities:", error);
+    }
+  };
+
   const showToast = (message, type = 'success') => {
     const id = Date.now();
     setToasts(prev => [...prev, { id, message, type }]);
@@ -46,9 +61,24 @@ const GenerateSkuModal = ({ isOpen, onClose, product, onSuccess }) => {
   };
 
 
-  const handleAddCapacity = () => {
+  const handleAddCapacity = async () => {
     if (!newCapacity.trim()) return;
     const cap = `${newCapacity} ${unit}`;
+    
+    // Add to DB if it doesn't exist
+    if (!dbCapacities.includes(cap)) {
+      try {
+        setIsAddingCapacity(true);
+        await productApi.createKilowatt({ name: cap });
+        await fetchDbCapacities();
+        showToast("Capacity saved to master");
+      } catch (error) {
+        showToast(error.response?.data?.message || "Failed to save capacity", "error");
+      } finally {
+        setIsAddingCapacity(false);
+      }
+    }
+
     if (!capacities.includes(cap)) {
       setCapacities([...capacities, cap]);
       setNewCapacity('');
@@ -120,7 +150,9 @@ const GenerateSkuModal = ({ isOpen, onClose, product, onSuccess }) => {
         skuCode: s.skuCode,
         product: product._id,
         brand: product.brandId?._id || product.brandId,
-        category: product.categoryId?.name,
+        category: (product.categoryIds && product.categoryIds.length > 0) ? product.categoryIds[0]?.name : product.categoryId?.name,
+        subCategory: (product.subCategoryIds && product.subCategoryIds.length > 0) ? product.subCategoryIds[0]?.name : product.subCategoryId?.name,
+        projectType: (product.projectTypes && product.projectTypes.length > 0) ? `${product.projectTypes[0]?.from} to ${product.projectTypes[0]?.to} kW` : product.projectTypeId?.name,
         technology: Array.isArray(product.technology) ? product.technology[0] : product.technology,
         capacity: s.capacity,
         wattage: parseFloat(s.capValue) || 0,
@@ -252,7 +284,7 @@ const GenerateSkuModal = ({ isOpen, onClose, product, onSuccess }) => {
             
             <div className="flex flex-wrap gap-2 mb-4 min-h-[40px] p-2 border border-dashed border-gray-200 rounded bg-gray-50/50">
               {capacities.length === 0 ? (
-                <span className="text-gray-400 text-xs italic px-2 py-1">N/A</span>
+                <span className="text-gray-400 text-xs italic px-2 py-1">Select or add capacities below</span>
               ) : (
                 capacities.map((cap, i) => (
                   <div key={i} className="bg-blue-600 text-white px-3 py-1 rounded-sm text-xs font-bold flex items-center gap-2 shadow-sm">
@@ -263,8 +295,36 @@ const GenerateSkuModal = ({ isOpen, onClose, product, onSuccess }) => {
               )}
             </div>
 
-            <div className="space-y-2">
-              <label className="block text-gray-500 text-xs font-bold">Add New Capacity</label>
+            {dbCapacities.length > 0 && (
+              <div className="mb-4">
+                <label className="block text-gray-500 text-xs font-bold mb-2">Select from Master</label>
+                <div className="flex flex-wrap gap-2">
+                  {dbCapacities.map((cap, idx) => {
+                    const isSelected = capacities.includes(cap);
+                    return (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => {
+                          if (isSelected) handleRemoveCapacity(cap);
+                          else setCapacities([...capacities, cap]);
+                        }}
+                        className={`px-3 py-1 rounded text-xs font-medium transition border ${
+                          isSelected 
+                            ? 'bg-blue-100 border-blue-300 text-blue-700' 
+                            : 'bg-white border-gray-200 text-gray-600 hover:border-blue-300 hover:text-blue-600'
+                        }`}
+                      >
+                        {cap}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            <div className="space-y-2 pt-2 border-t border-gray-100">
+              <label className="block text-gray-500 text-xs font-bold">Add New Capacity to Master</label>
               <div className="flex gap-2">
                 <input
                   type="text"
@@ -293,9 +353,10 @@ const GenerateSkuModal = ({ isOpen, onClose, product, onSuccess }) => {
                 </select>
                 <button
                   onClick={handleAddCapacity}
-                  className="bg-[#0066cc] hover:bg-blue-700 text-white px-6 py-2 rounded text-sm font-bold transition shadow-md"
+                  disabled={isAddingCapacity}
+                  className="bg-[#0066cc] hover:bg-blue-700 text-white px-6 py-2 rounded text-sm font-bold transition shadow-md disabled:opacity-50 flex items-center justify-center min-w-[80px]"
                 >
-                  Add
+                  {isAddingCapacity ? <Loader2 size={16} className="animate-spin" /> : 'Add'}
                 </button>
               </div>
             </div>

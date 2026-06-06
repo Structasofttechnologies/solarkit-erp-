@@ -3,6 +3,10 @@ import User from '../../models/users/User.js';
 import ProjectType from '../../models/projects/ProjectType.js';
 import Partner from '../../models/partner/Partner.js';
 import District from '../../models/core/District.js';
+import Country from '../../models/core/Country.js';
+import State from '../../models/core/State.js';
+import Cluster from '../../models/core/Cluster.js';
+import City from '../../models/core/City.js';
 import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 
@@ -19,7 +23,11 @@ export const createCompanyUser = async (req, res) => {
       fullName,
       mobileNumber,
       emailAddress,
+      country,
+      state,
+      cluster,
       district,
+      city,
       // Partner Goals
       partnerGoalsEnabled,
       partnerMonthlyTargetKw,
@@ -63,7 +71,11 @@ export const createCompanyUser = async (req, res) => {
       fullName,
       mobileNumber,
       emailAddress,
+      country,
+      state,
+      cluster,
       district,
+      city,
 
       // Partner Goals
       partnerGoalsEnabled:    partnerGoalsEnabled    || false,
@@ -93,7 +105,11 @@ export const createCompanyUser = async (req, res) => {
         fullName:            newUser.fullName,
         mobileNumber:        newUser.mobileNumber,
         emailAddress:        newUser.emailAddress,
+        country:             newUser.country,
+        state:               newUser.state,
+        cluster:             newUser.cluster,
         district:            newUser.district,
+        city:                newUser.city,
         role:                newUser.role,
         status:              newUser.status,
         partnerGoalsEnabled: newUser.partnerGoalsEnabled,
@@ -152,7 +168,11 @@ export const mobileLogin = async (req, res) => {
         fullName:               user.fullName,
         mobileNumber:           user.mobileNumber,
         emailAddress:           user.emailAddress,
+        country:                user.country,
+        state:                  user.state,
+        cluster:                user.cluster,
         district:               user.district,
+        city:                   user.city,
         role:                   user.role,
         status:                 user.status,
         partnerGoalsEnabled:    user.partnerGoalsEnabled,
@@ -280,12 +300,51 @@ export const getAllCompanyUsers = async (req, res) => {
 
     const users = await CompanyUser.find(query).sort({ createdAt: -1 }).lean();
 
+    // -- Populate Names for Country, State, Cluster, District, City --
+    const countryIds = new Set();
+    const stateIds = new Set();
+    const clusterIds = new Set();
+    const districtIds = new Set();
+    const cityIds = new Set();
+
+    users.forEach(u => {
+      if (u.country) u.country.split(',').map(id => id.trim()).forEach(id => mongoose.Types.ObjectId.isValid(id) && countryIds.add(id));
+      if (u.state) u.state.split(',').map(id => id.trim()).forEach(id => mongoose.Types.ObjectId.isValid(id) && stateIds.add(id));
+      if (u.cluster) u.cluster.split(',').map(id => id.trim()).forEach(id => mongoose.Types.ObjectId.isValid(id) && clusterIds.add(id));
+      if (u.district) u.district.split(',').map(id => id.trim()).forEach(id => mongoose.Types.ObjectId.isValid(id) && districtIds.add(id));
+      if (u.city) u.city.split(',').map(id => id.trim()).forEach(id => mongoose.Types.ObjectId.isValid(id) && cityIds.add(id));
+    });
+
+    const [countries, states, clusters, districts, cities] = await Promise.all([
+      countryIds.size > 0 ? Country.find({ _id: { $in: Array.from(countryIds) } }, 'name') : [],
+      stateIds.size > 0 ? State.find({ _id: { $in: Array.from(stateIds) } }, 'name') : [],
+      clusterIds.size > 0 ? Cluster.find({ _id: { $in: Array.from(clusterIds) } }, 'name') : [],
+      districtIds.size > 0 ? District.find({ _id: { $in: Array.from(districtIds) } }, 'name') : [],
+      cityIds.size > 0 ? City.find({ _id: { $in: Array.from(cityIds) } }, 'name') : []
+    ]);
+
+    const countryMap = new Map(countries.map(c => [c._id.toString(), c.name]));
+    const stateMap = new Map(states.map(s => [s._id.toString(), s.name]));
+    const clusterMap = new Map(clusters.map(c => [c._id.toString(), c.name]));
+    const districtMap = new Map(districts.map(d => [d._id.toString(), d.name]));
+    const cityMap = new Map(cities.map(c => [c._id.toString(), c.name]));
+
+    const formatNames = (str, map) => {
+      if (!str) return '';
+      return str.split(',').map(id => id.trim()).map(id => map.get(id) || id).join(', ');
+    };
+
     // Attach count of partners/users created by this company user
     const usersWithCounts = await Promise.all(
       users.map(async (u) => {
         const partnersCreatedCount = await User.countDocuments({ createdBy: u._id });
         return {
           ...u,
+          country: formatNames(u.country, countryMap),
+          state: formatNames(u.state, stateMap),
+          cluster: formatNames(u.cluster, clusterMap),
+          district: formatNames(u.district, districtMap),
+          city: formatNames(u.city, cityMap),
           partnersCreatedCount,
         };
       })
@@ -339,7 +398,7 @@ export const getCompanyUserById = async (req, res) => {
 export const updateCompanyUser = async (req, res) => {
   try {
     const allowedFields = [
-      'fullName', 'emailAddress', 'district', 'status',
+      'fullName', 'emailAddress', 'country', 'state', 'cluster', 'district', 'city', 'status',
       'partnerGoalsEnabled', 'partnerMonthlyTargetKw', 'partnerPerKwCommission',
       'partnerQuotePermissions', 'partnerTypes',
       'projectGoalEnabled', 'projectMonthlyTargetKw', 'projectPerKwCommission',

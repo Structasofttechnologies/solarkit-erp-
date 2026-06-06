@@ -2,7 +2,10 @@ import Technology from '../../models/projects/Technology.js';
 
 export const getAll = async (req, res) => {
     try {
-        const items = await Technology.find().sort({ createdAt: -1 });
+        const items = await Technology.find()
+            .populate('subProjectTypeId')
+            .populate('brandId')
+            .sort({ createdAt: -1 });
         res.status(200).json({ success: true, data: items });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });

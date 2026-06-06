@@ -55,7 +55,14 @@ const brandManufacturerSchema = new mongoose.Schema(
     },
     {
         timestamps: true,
+        toJSON: { virtuals: true },
+        toObject: { virtuals: true }
     }
 );
+
+// Virtual field to map companyName to name for mobile API compatibility
+brandManufacturerSchema.virtual('name').get(function () {
+    return this.companyName;
+});
 
 export default mongoose.model('BrandManufacturer', brandManufacturerSchema);

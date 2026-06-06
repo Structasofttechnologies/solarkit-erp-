@@ -19,9 +19,21 @@ const companyUserSchema = new mongoose.Schema(
       unique: true,
       lowercase: true,
     },
+    country: {
+      type: String,
+    },
+    state: {
+      type: String,
+    },
+    cluster: {
+      type: String,
+    },
     district: {
       type: String,
       required: true,
+    },
+    city: {
+      type: String,
     },
     role: {
       type: String,

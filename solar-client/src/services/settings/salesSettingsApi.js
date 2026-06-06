@@ -211,7 +211,8 @@ const salesSettingsService = {
       const res = await api.get('/partner-settings/types');
       return res.data;
     } catch (err) {
-      throw err.response?.data || err.message;
+      console.warn('getPartnerTypes failed (non-critical):', err.response?.status);
+      return [];
     }
   },
   async getPartnerPlans(params) {
@@ -219,7 +220,8 @@ const salesSettingsService = {
       const res = await api.get('/partner-settings/plans', { params });
       return res.data;
     } catch (err) {
-      throw err.response?.data || err.message;
+      console.warn('getPartnerPlans failed (non-critical):', err.response?.status);
+      return [];
     }
   },
   async getCompanyMargins() {
@@ -227,7 +229,8 @@ const salesSettingsService = {
       const res = await api.get('/sales-settings/company-margin');
       return res.data;
     } catch (err) {
-      throw err.response?.data || err.message;
+      console.warn('getCompanyMargins failed (non-critical):', err.response?.status);
+      return [];
     }
   },
   async updateCompanyMargin(data) {

@@ -75,7 +75,7 @@ export const createProduct = async (req, res, next) => {
     const toId = (val) => (val === "" || val === null) ? undefined : val;
 
     // Validation
-    if (!name || !categoryId) {
+    if (!name || (!categoryId && (!categoryIds || categoryIds.length === 0))) {
       return res.status(400).json({ success: false, message: 'Name and Category are required' });
     }
 

@@ -193,9 +193,10 @@ export default function CombokitOverview() {
   };
 
   // --- Options Maps (for UI filters) ---
-  const userTypeOptions = masterPartnerTypes.map(p => ({
-    value: p.name,
-    label: p.name
+  const partnerTypesArray = Array.isArray(masterPartnerTypes) ? masterPartnerTypes : (masterPartnerTypes?.data || []);
+  const userTypeOptions = partnerTypesArray.map(p => ({
+    value: p.name || p.partnerType || p,
+    label: p.name || p.partnerType || p
   }));
 
   const getSubCategoryOptions = () => {

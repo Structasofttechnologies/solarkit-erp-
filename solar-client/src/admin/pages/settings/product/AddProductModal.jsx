@@ -21,11 +21,12 @@ const AddProductModal = ({ isOpen, onClose, selectedStates, selectedClusters, st
   const [isProjectTypeDropdownOpen, setIsProjectTypeDropdownOpen] = useState(false);
   const [isSubProjectTypeDropdownOpen, setIsSubProjectTypeDropdownOpen] = useState(false);
   const [isSkuParamDropdownOpen, setIsSkuParamDropdownOpen] = useState(false);
-  const [newTech, setNewTech] = useState('');
-  const [techOptions, setTechOptions] = useState(['bifacial', 'topcon', 'monocrystalline']);
+  const [techOptions, setTechOptions] = useState([]);
   const [productTypeFilter, setProductTypeFilter] = useState('');
   const [brandFilter, setBrandFilter] = useState('');
   const [hasTolerance, setHasTolerance] = useState(false);
+  const [newTechName, setNewTechName] = useState('');
+  const [isAddingTech, setIsAddingTech] = useState(false);
 
   // Form State
   const [formData, setFormData] = useState({
@@ -130,13 +131,14 @@ const AddProductModal = ({ isOpen, onClose, selectedStates, selectedClusters, st
   const fetchMasters = async () => {
     try {
       setFetchingMasters(true);
-      const [catRes, subPTypeRes, mappingRes, brandRes, subCatRes, skusRes] = await Promise.all([
+      const [catRes, subPTypeRes, mappingRes, brandRes, subCatRes, skusRes, techRes] = await Promise.all([
         productApi.getCategories(),
         productApi.getSubProjectTypes(),
         productApi.getProjectCategoryMappings(),
         productApi.getBrands(),
         productApi.getSubCategories(),
-        productApi.getSkus()
+        productApi.getSkus(),
+        productApi.getTechnologies()
       ]);
 
       setCategories(catRes?.data?.data || []);
@@ -145,6 +147,7 @@ const AddProductModal = ({ isOpen, onClose, selectedStates, selectedClusters, st
       setBrands(Array.isArray(brandRes?.data) ? brandRes.data : brandRes?.data?.data || []);
       setSubCategories(subCatRes?.data?.data || []);
       setSkus(skusRes?.data?.data || []);
+      setTechOptions((techRes?.data?.data || []).map(t => t.name));
 
       const allProducts = (await productApi.getAll())?.data?.data || [];
       const productTemplates = allProducts.filter(p => !p.stateId && !p.clusterId);
@@ -155,6 +158,26 @@ const AddProductModal = ({ isOpen, onClose, selectedStates, selectedClusters, st
       showToast("Failed to load master data", "error");
     } finally {
       setFetchingMasters(false);
+    }
+  };
+
+  const handleAddTech = async () => {
+    if (!newTechName.trim()) {
+      showToast("Technology name cannot be empty", "error");
+      return;
+    }
+    try {
+      setIsAddingTech(true);
+      await productApi.createTechnology({ name: newTechName.trim() });
+      showToast("Technology added successfully");
+      setNewTechName('');
+      // Refresh tech options
+      const techRes = await productApi.getTechnologies();
+      setTechOptions((techRes?.data?.data || []).map(t => t.name));
+    } catch (err) {
+      showToast(err.response?.data?.message || "Failed to add technology", "error");
+    } finally {
+      setIsAddingTech(false);
     }
   };
 
@@ -235,8 +258,8 @@ const AddProductModal = ({ isOpen, onClose, selectedStates, selectedClusters, st
 
   // Derived options
   const filteredMappings = mappings.filter(m =>
-    (!formData.categoryIds.length || formData.categoryIds.some(cat => (m.categoryId?._id || m.categoryId) === cat.value)) &&
-    (!formData.subCategoryIds.length || formData.subCategoryIds.some(sub => (m.subCategoryId?._id || m.subCategoryId) === sub.value))
+    (!formData.categoryIds.length || formData.categoryIds.some(cat => String(m.categoryId?._id || m.categoryId) === String(cat.value))) &&
+    (!formData.subCategoryIds.length || formData.subCategoryIds.some(sub => String(m.subCategoryId?._id || m.subCategoryId) === String(sub.value)))
   );
 
   // Eliminate duplicates for the dropdown display
@@ -296,6 +319,45 @@ const AddProductModal = ({ isOpen, onClose, selectedStates, selectedClusters, st
               onChange={(e) => {
                 const val = e.target.value;
                 setProductTypeFilter(val);
+                
+                // Auto-fill formData based on the selected template
+                if (val) {
+                  const template = templates.find(t => t._id === val);
+                  if (template) {
+                    
+                    const templateCatIds = template.categoryIds?.length ? template.categoryIds : (template.categoryId ? [template.categoryId?._id || template.categoryId] : []);
+                    const mappedCats = templateCatIds.map(id => {
+                      const idStr = String(id?._id || id);
+                      const cat = categories.find(c => String(c._id) === idStr);
+                      return { value: idStr, label: cat?.name || 'Category' };
+                    });
+
+                    const templateSubCatIds = template.subCategoryIds?.length ? template.subCategoryIds : (template.subCategoryId ? [template.subCategoryId?._id || template.subCategoryId] : []);
+                    const mappedSubCats = templateSubCatIds.map(id => {
+                      const idStr = String(id?._id || id);
+                      const subCat = subCategories.find(c => String(c._id) === idStr);
+                      return { value: idStr, label: subCat?.name || 'Sub Category' };
+                    });
+
+                    setFormData(prev => ({
+                      ...prev,
+                      name: template.name || prev.name,
+                      categoryIds: mappedCats.length ? mappedCats : prev.categoryIds,
+                      subCategoryIds: mappedSubCats.length ? mappedSubCats : prev.subCategoryIds,
+                      brandId: template.brandId?._id || template.brandId || prev.brandId,
+                      projectTypes: template.projectTypes || prev.projectTypes,
+                      subProjectTypeIds: template.subProjectTypeIds?.map(p => {
+                        const idStr = String(p?._id || p);
+                        const subPT = subProjectTypes.find(sp => String(sp._id) === idStr);
+                        return { value: idStr, label: subPT?.name || 'Sub Project Type' };
+                      }) || prev.subProjectTypeIds,
+                      technology: typeof template.technology === 'string' ? template.technology.split(',').map(t => t.trim()).filter(Boolean) : (Array.isArray(template.technology) ? template.technology : prev.technology),
+                      tolerance: template.tolerance || prev.tolerance,
+                      dcr: template.dcr || prev.dcr
+                    }));
+                    if (template.brandId) setBrandFilter(template.brandId?._id || template.brandId);
+                  }
+                }
               }}
             >
               <option value="" className="text-gray-400">Select Product Type</option>
@@ -355,8 +417,8 @@ const AddProductModal = ({ isOpen, onClose, selectedStates, selectedClusters, st
             <Select
               isMulti
               options={formatOptions(subCategories.filter(c => {
-                const parentId = c.categoryId?._id || c.category?._id || c.categoryId || c.category;
-                return formData.categoryIds.some(cat => cat.value === parentId);
+                const parentId = String(c.categoryId?._id || c.category?._id || c.categoryId || c.category);
+                return formData.categoryIds.some(cat => String(cat.value) === parentId);
               }))}
               value={formData.subCategoryIds}
               onChange={(vals) => setFormData({ ...formData, subCategoryIds: vals || [] })}
@@ -516,28 +578,24 @@ const AddProductModal = ({ isOpen, onClose, selectedStates, selectedClusters, st
                   <span className="group-hover:text-blue-600 transition capitalize">{opt}</span>
                 </label>
               ))}
+              {techOptions.length === 0 && <span className="text-xs text-gray-500">No product technology found. Please add below.</span>}
             </div>
-            <div className="flex gap-2">
+            
+            <div className="flex gap-2 mt-4 max-w-sm">
               <input
                 type="text"
-                placeholder="Add technology"
-                className="flex-1 border border-gray-200 rounded p-2 text-sm outline-none focus:border-blue-400 transition"
-                value={newTech}
-                onChange={(e) => setNewTech(e.target.value)}
+                placeholder="New Technology Name"
+                value={newTechName}
+                onChange={(e) => setNewTechName(e.target.value)}
+                className="flex-1 border border-gray-200 rounded px-2.5 py-1.5 outline-none text-sm text-gray-700 bg-white"
               />
               <button
                 type="button"
-                className="bg-blue-600 text-white px-6 py-1.5 rounded text-sm font-bold hover:bg-blue-700 transition shadow-sm"
-                onClick={() => {
-                  if (newTech.trim() && !techOptions.includes(newTech.trim().toLowerCase())) {
-                    const tech = newTech.trim().toLowerCase();
-                    setTechOptions([...techOptions, tech]);
-                    setFormData(prev => ({ ...prev, technology: [...prev.technology, tech] }));
-                    setNewTech('');
-                  }
-                }}
+                onClick={handleAddTech}
+                disabled={isAddingTech}
+                className="bg-[#28A745] hover:bg-[#218838] text-white px-3 py-1.5 rounded flex items-center justify-center font-medium text-xs transition-colors disabled:opacity-50"
               >
-                Add
+                {isAddingTech ? <Loader2 size={14} className="animate-spin" /> : '+ Add'}
               </button>
             </div>
           </div>
