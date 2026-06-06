@@ -216,15 +216,17 @@ export const deleteState = async (req, res, next) => {
 
 export const getAllCities = async (req, res, next) => {
   try {
-    const { districtId, stateId, countryId, isActive } = req.query;
+    const { zoneId, clusterId, districtId, stateId, countryId, isActive } = req.query;
     const query = {};
 
+    if (zoneId) query.zone = zoneId;
+    if (clusterId) query.cluster = clusterId;
     if (districtId) query.district = districtId;
     if (stateId) query.state = stateId;
     if (countryId) query.country = countryId;
     if (isActive !== undefined) query.isActive = isActive === 'true';
 
-    const cities = await City.find(query).populate('district state country').sort({ name: 1 });
+    const cities = await City.find(query).populate('zone cluster district state country').sort({ name: 1 });
     res.json({ success: true, count: cities.length, data: cities });
   } catch (err) {
     next(err);
@@ -233,7 +235,7 @@ export const getAllCities = async (req, res, next) => {
 
 export const getCityById = async (req, res, next) => {
   try {
-    const city = await City.findById(req.params.id).populate('district state country');
+    const city = await City.findById(req.params.id).populate('zone cluster district state country');
     if (!city) return res.status(404).json({ success: false, message: 'City not found' });
 
     res.json({ success: true, data: city });
@@ -244,15 +246,17 @@ export const getCityById = async (req, res, next) => {
 
 export const createCity = async (req, res, next) => {
   try {
-    const { name, district, state, country, areaType, pincodes, description } = req.body;
+    const { name, district, cluster, zone, state, country, areaType, pincodes, description } = req.body;
 
-    if (!district || !state || !country) {
-      return res.status(400).json({ success: false, message: 'District, state and country are required' });
+    if (!district || !cluster || !zone || !state || !country) {
+      return res.status(400).json({ success: false, message: 'District, cluster, zone, state and country are required' });
     }
 
     const city = await City.create({
       name,
       district,
+      cluster,
+      zone,
       state,
       country,
       areaType,
@@ -261,7 +265,7 @@ export const createCity = async (req, res, next) => {
       createdBy: req.user?.id,
     });
 
-    await city.populate('district state country');
+    await city.populate('district cluster zone state country');
     res.status(201).json({ success: true, message: 'City created successfully', data: city });
   } catch (err) {
     next(err);
@@ -298,7 +302,7 @@ export const bulkCreateCities = async (req, res, next) => {
     // 2. Process unique inputs against DB
     const finalToInsert = [];
     for (const cityData of uniqueInputs) {
-      if (!cityData.name || !cityData.district || !cityData.state || !cityData.country) {
+      if (!cityData.name || !cityData.district || !cityData.cluster || !cityData.zone || !cityData.state || !cityData.country) {
         skipped++;
         continue;
       }
@@ -306,7 +310,7 @@ export const bulkCreateCities = async (req, res, next) => {
       // Check for exact existing record
       const existing = await City.findOne({
         name: { $regex: new RegExp(`^${cityData.name}$`, 'i') },
-        district: cityData.district
+        zone: cityData.zone
       });
 
       if (existing) {
@@ -348,13 +352,13 @@ export const bulkCreateCities = async (req, res, next) => {
 
 export const updateCity = async (req, res, next) => {
   try {
-    const { name, district, state, country, areaType, pincodes, description, isActive } = req.body;
+    const { name, district, cluster, zone, state, country, areaType, pincodes, description, isActive } = req.body;
 
     const city = await City.findByIdAndUpdate(
       req.params.id,
-      { name, district, state, country, areaType, pincodes, description, isActive, updatedBy: req.user?.id },
+      { name, district, cluster, zone, state, country, areaType, pincodes, description, isActive, updatedBy: req.user?.id },
       { new: true, runValidators: true }
-    ).populate('district state country');
+    ).populate('district cluster zone state country');
 
     if (!city) return res.status(404).json({ success: false, message: 'City not found' });
 
@@ -795,8 +799,13 @@ export const getZonesHierarchy = async (req, res, next) => {
 
 export const getCitiesHierarchy = async (req, res, next) => {
   try {
-    const { districtId } = req.query;
-    const data = await locationService.getCitiesByDistrict(districtId);
+    const { zoneId, districtId } = req.query;
+    let data;
+    if (zoneId) {
+      data = await locationService.getCitiesByZone(zoneId);
+    } else {
+      data = await locationService.getCitiesByDistrict(districtId);
+    }
     res.json({ success: true, data });
   } catch (err) {
     next(err);

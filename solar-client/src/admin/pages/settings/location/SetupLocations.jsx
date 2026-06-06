@@ -344,8 +344,9 @@ export default function SetupLocations() {
         payload.districts = Array.isArray(formData.district) ? formData.district : (formData.districts || []);
         payload.cluster = toId(formData.cluster);
       } else if (activeTab === 'cities') {
-        // Cities now attach directly to districts
         payload.district = toId(formData.district);
+        payload.cluster = toId(formData.cluster);
+        payload.zone = toId(formData.zone);
         payload.areaType = formData.areaType;
         payload.pincodes = formData.pincodes;
         // Name is optional for cities
@@ -446,9 +447,9 @@ export default function SetupLocations() {
     const file = e.target.files[0];
     if (!file) return;
 
-    // Validate that district is selected (Country, State, District hierarchy must be chosen)
-    if (!formData.district || !formData.state || !formData.country) {
-      setError('Please select Country, State, and District before uploading cities.');
+    // Validate that district, cluster, and zone are selected
+    if (!formData.zone || !formData.cluster || !formData.district || !formData.state || !formData.country) {
+      setError('Please select Country, State, District, Cluster, and Zone before uploading cities.');
       return;
     }
 
@@ -492,7 +493,9 @@ export default function SetupLocations() {
               pincodes: pincodesArray,
               country: toId(formData.country),
               state: toId(formData.state),
-              district: toId(formData.district)
+              district: toId(formData.district),
+              cluster: toId(formData.cluster),
+              zone: toId(formData.zone)
             };
           });
 
@@ -726,12 +729,12 @@ export default function SetupLocations() {
                       activeTab === 'districts' ? 'state' :
                         activeTab === 'clusters' ? 'district' :
                           activeTab === 'zones' ? 'district' :
-                            activeTab === 'cities' ? 'district' : null
+                            activeTab === 'cities' ? 'zone' : null
                   }
                   multiple={{
                     district: ['clusters', 'zones'].includes(activeTab)
                   }}
-                  isZoneMode={activeTab === 'zones'}
+                  isZoneMode={['zones', 'cities'].includes(activeTab)}
                   layout="stack"
                 />
               )}

@@ -75,9 +75,22 @@ class LocationService {
         if (clusterId && clusterId !== 'all') {
             const val = typeof clusterId === 'object' ? (clusterId._id || clusterId.id || String(clusterId)) : String(clusterId);
             const ids = val.includes(',') ? val.split(',') : [val];
-            query.clusters = { $in: ids.filter(id => id && id !== '[object Object]') };
+            query.cluster = { $in: ids.filter(id => id && id !== '[object Object]') };
         }
         return await Zone.find(query).sort({ name: 1 });
+    }
+
+    /**
+     * Get cities by zone
+     */
+    async getCitiesByZone(zoneId) {
+        const query = { isActive: true };
+        if (zoneId && zoneId !== 'all') {
+            const val = typeof zoneId === 'object' ? (zoneId._id || zoneId.id || String(zoneId)) : String(zoneId);
+            const ids = val.includes(',') ? val.split(',') : [val];
+            query.zone = { $in: ids.filter(id => id && id !== '[object Object]') };
+        }
+        return await City.find(query).sort({ name: 1 });
     }
 
     /**
