@@ -13,6 +13,7 @@ import FranchiseePlan from '../../models/franchisee/FranchiseePlan.js';
 import ChannelPartnerPlan from '../../models/finance/ChannelPartnerPlan.js';
 import BrandManufacturer from '../../models/inventory/BrandManufacturer.js';
 import SKU from '../../models/inventory/SKU.js';
+import { saveBase64Image } from '../../utils/imageUpload.js';
 
 export const getPlansByRole = async (req, res) => {
     try {
@@ -367,6 +368,15 @@ export const deleteBundlePlan = async (req, res) => {
 
 export const createAssignment = async (req, res) => {
     try {
+        if (req.body.comboKits && Array.isArray(req.body.comboKits)) {
+            req.body.comboKits = req.body.comboKits.map(kit => {
+                if (kit.image) {
+                    kit.image = saveBase64Image(kit.image);
+                }
+                return kit;
+            });
+        }
+        
         // Validate uniqueness if needed (e.g. one active assignment per location per type)
         const newAssignment = new ComboKitAssignment(req.body);
         const savedAssignment = await newAssignment.save();
@@ -411,6 +421,9 @@ export const updateAssignment = async (req, res) => {
                 const newKit = { ...kit };
                 if (newKit.id && !/^[0-9a-fA-F]{24}$/.test(newKit.id)) {
                     delete newKit.id;
+                }
+                if (newKit.image) {
+                    newKit.image = saveBase64Image(newKit.image);
                 }
                 return newKit;
             });

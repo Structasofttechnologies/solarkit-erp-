@@ -189,8 +189,8 @@ const CustomizeCombokit = () => {
 
   const fetchPartners = async () => {
     try {
-      const data = await getPartnerTypes();
-      setPartners(data || []);
+      const response = await getPartnerTypes();
+      setPartners(response?.data || []);
     } catch (err) {
       console.error("Error fetching partners", err);
     }
@@ -1116,7 +1116,7 @@ const CustomizeCombokit = () => {
             </div>
 
             <div className="flex flex-wrap gap-4">
-              {partners.map((partner, index) => (
+              {(Array.isArray(partners) ? partners : []).map((partner, index) => (
                 <div
                   key={`${partner._id}-${index}`}
                   onClick={() => handleRoleClick(partner.name)}
@@ -1697,7 +1697,7 @@ const CustomizeCombokit = () => {
                           placeholder="Select Partner"
                           value={assignmentForm.role ? { label: assignmentForm.role, value: assignmentForm.role } : null}
                           onChange={(opt) => setAssignmentForm({ ...assignmentForm, role: opt.value })}
-                          options={partners.map(p => ({ label: p.name, value: p.name }))}
+                          options={(Array.isArray(partners) ? partners : []).map(p => ({ label: p.name, value: p.name }))}
                         />
                       </div>
                     </div>

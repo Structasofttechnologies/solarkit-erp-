@@ -1,5 +1,6 @@
 import BrandManufacturer from '../../models/inventory/BrandManufacturer.js';
 import BrandSupplier from '../../models/inventory/BrandSupplier.js';
+import { saveBase64Image } from '../../utils/imageUpload.js';
 
 // --- Brand Manufacturer Controllers ---
 
@@ -17,6 +18,11 @@ export const createManufacturer = async (req, res) => {
             city, // This might be cluster in some contexts, but we use city model
         } = req.body;
 
+        let processedBrandLogo = brandLogo;
+        if (processedBrandLogo) {
+            processedBrandLogo = saveBase64Image(processedBrandLogo);
+        }
+
         // Check for duplicates (optional, based on company name?)
         const existing = await BrandManufacturer.findOne({ companyName });
         if (existing) {
@@ -27,7 +33,7 @@ export const createManufacturer = async (req, res) => {
             companyName,
             companyOriginCountry,
             brand,
-            brandLogo,
+            brandLogo: processedBrandLogo,
             product,
             comboKit,
             state: state || null,
@@ -79,6 +85,10 @@ export const updateManufacturer = async (req, res) => {
     try {
         const { id } = req.params;
         const updateData = req.body;
+        
+        if (updateData.brandLogo) {
+            updateData.brandLogo = saveBase64Image(updateData.brandLogo);
+        }
 
         const updatedManufacturer = await BrandManufacturer.findByIdAndUpdate(
             id,

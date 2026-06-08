@@ -6,7 +6,6 @@ const AddProjectType = () => {
     // Data States
     const [categories, setCategories] = useState([]);
     const [subCategories, setSubCategories] = useState([]);
-    const [projectTypes, setProjectTypes] = useState([]);
     const [subProjectTypes, setSubProjectTypes] = useState([]);
 
     // Loading & UI States
@@ -15,17 +14,12 @@ const AddProjectType = () => {
 
     // Form Inputs
     const [newCategoryName, setNewCategoryName] = useState('');
-    const [selectedProjectTypeForCat, setSelectedProjectTypeForCat] = useState('');
 
     const [newSubCategoryName, setNewSubCategoryName] = useState('');
     const [selectedCategoryForSubCat, setSelectedCategoryForSubCat] = useState('');
-    const [selectedProjectTypeForSubCat, setSelectedProjectTypeForSubCat] = useState('');
 
     const [newSubProjectTypeName, setNewSubProjectTypeName] = useState('');
-    const [selectedProjectTypeForSubPT, setSelectedProjectTypeForSubPT] = useState('');
-
-    const [newProjectTypeName, setNewProjectTypeName] = useState('');
-    const [selectedSubCategoryForPT, setSelectedSubCategoryForPT] = useState('');
+    const [selectedSubCategoryForSubPT, setSelectedSubCategoryForSubPT] = useState('');
 
     // Editing State
     const [editingItem, setEditingItem] = useState(null);
@@ -36,8 +30,7 @@ const AddProjectType = () => {
             name: item.name, 
             type,
             ...(type === 'subCat' ? { categoryId: item.categoryId?._id || item.category?._id || item.categoryId || '' } : {}),
-            ...(type === 'pt' ? { subCategoryId: item.subCategoryId?._id || item.subCategory?._id || item.subCategoryId || '' } : {}),
-            ...(type === 'subPT' ? { projectTypeId: item.projectTypeId?._id || item.projectType?._id || item.projectTypeId || '' } : {})
+            ...(type === 'subPT' ? { subCategoryId: item.subCategoryId?._id || item.subCategory?._id || item.subCategoryId || '' } : {})
         });
     };
 
@@ -64,13 +57,6 @@ const AddProjectType = () => {
                 await productApi.updateSubProjectType(editingItem.id, { 
                     ...item, 
                     name: editingItem.name.trim(),
-                    projectTypeId: editingItem.projectTypeId 
-                });
-            } else if (editingItem.type === 'pt') {
-                const item = projectTypes.find(c => c._id === editingItem.id);
-                await productApi.updateProjectType(editingItem.id, { 
-                    ...item, 
-                    name: editingItem.name.trim(),
                     subCategoryId: editingItem.subCategoryId 
                 });
             }
@@ -95,32 +81,25 @@ const AddProjectType = () => {
     const fetchInitialData = async () => {
         try {
             setLoading(true);
-            const [catRes, subPTypeRes, pTypeRes, subCatRes] = await Promise.all([
+            const [catRes, subPTypeRes, subCatRes] = await Promise.all([
                 productApi.getCategories(),
                 productApi.getSubProjectTypes(),
-                productApi.getProjectTypes(),
                 productApi.getSubCategories()
             ]);
 
             const cats = catRes?.data?.data || [];
-            const pts = pTypeRes?.data?.data || [];
+            const subCats = subCatRes?.data?.data || [];
 
             setCategories(cats);
             setSubProjectTypes(subPTypeRes?.data?.data || []);
-            setProjectTypes(pTypeRes?.data?.data || []);
-            setSubCategories(subCatRes?.data?.data || []);
+            setSubCategories(subCats);
 
             // Set initial dropdown values if available
-            if (pts.length > 0) {
-                setSelectedProjectTypeForCat(pts[0]._id);
-                setSelectedProjectTypeForSubCat(pts[0]._id);
-                setSelectedProjectTypeForSubPT(pts[0]._id);
-            }
             if (cats.length > 0) {
                 setSelectedCategoryForSubCat(cats[0]._id);
             }
-            if (subCatRes?.data?.data?.length > 0) {
-                setSelectedSubCategoryForPT(subCatRes.data.data[0]._id);
+            if (subCats.length > 0) {
+                setSelectedSubCategoryForSubPT(subCats[0]._id);
             }
         } catch (err) {
             console.error(err);
@@ -134,8 +113,7 @@ const AddProjectType = () => {
         if (!newCategoryName.trim()) return showToast("Category name is required", "error");
         try {
             await productApi.createCategory({
-                name: newCategoryName.trim(),
-                projectTypeId: selectedProjectTypeForCat || null
+                name: newCategoryName.trim()
             });
             showToast("Category added");
             setNewCategoryName('');
@@ -152,8 +130,7 @@ const AddProjectType = () => {
         try {
             await productApi.createSubCategory({
                 name: newSubCategoryName.trim(),
-                categoryId: selectedCategoryForSubCat,
-                projectTypeId: selectedProjectTypeForSubCat || null
+                categoryId: selectedCategoryForSubCat
             });
             showToast("Sub Category added");
             setNewSubCategoryName('');
@@ -163,30 +140,14 @@ const AddProjectType = () => {
         }
     };
 
-    const handleAddProjectType = async () => {
-        if (!newProjectTypeName.trim()) return showToast("Project Type name is required", "error");
-        if (!selectedSubCategoryForPT) return showToast("Sub Category selection is required", "error");
-
-        try {
-            await productApi.createProjectType({
-                name: newProjectTypeName.trim(),
-                subCategoryId: selectedSubCategoryForPT
-            });
-            showToast("Project Type added");
-            setNewProjectTypeName('');
-            fetchInitialData();
-        } catch (err) {
-            showToast(err.response?.data?.message || "Failed to add project type", "error");
-        }
-    };
-
     const handleAddSubProjectType = async () => {
         if (!newSubProjectTypeName.trim()) return showToast("Sub Project Type name is required", "error");
+        if (!selectedSubCategoryForSubPT) return showToast("Sub Category selection is required", "error");
 
         try {
             await productApi.createSubProjectType({
                 name: newSubProjectTypeName.trim(),
-                projectTypeId: selectedProjectTypeForSubPT || null
+                subCategoryId: selectedSubCategoryForSubPT
             });
             showToast("Sub Project Type added");
             setNewSubProjectTypeName('');
@@ -202,7 +163,6 @@ const AddProjectType = () => {
             if (type === 'cat') await productApi.deleteCategory(id);
             if (type === 'subCat') await productApi.deleteSubCategory(id);
             if (type === 'subPT') await productApi.deleteSubProjectType(id);
-            if (type === 'pt') await productApi.deleteProjectType(id);
             showToast("Item deleted");
             fetchInitialData();
         } catch (err) {
@@ -286,38 +246,6 @@ const AddProjectType = () => {
                             </div>
                         </div>
 
-                        {/* Project Type */}
-                        <div>
-                            <div className="flex justify-between items-center mb-1">
-                                <h3 className="text-[#0073B7] font-bold text-[15px]">Project Type</h3>
-                                <div className="flex gap-1">
-                                    <select
-                                        className="text-xs border border-gray-200 rounded px-1 py-0.5 outline-none text-gray-500 bg-transparent"
-                                        value={selectedSubCategoryForPT}
-                                        onChange={(e) => setSelectedSubCategoryForPT(e.target.value)}
-                                    >
-                                        <option value="">Sub Category</option>
-                                        {subCategories.map(c => <option key={c._id} value={c._id}>{c.name}</option>)}
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="flex h-10">
-                                <input
-                                    type="text"
-                                    className="border border-gray-300 rounded-l px-3 w-full outline-none focus:border-[#0073B7] text-sm"
-                                    placeholder="Enter Project Type"
-                                    value={newProjectTypeName}
-                                    onChange={(e) => setNewProjectTypeName(e.target.value)}
-                                />
-                                <button
-                                    onClick={handleAddProjectType}
-                                    className="bg-[#28A745] hover:bg-[#218838] text-white px-5 rounded-r flex items-center justify-center font-medium text-sm transition-colors"
-                                >
-                                    + Add
-                                </button>
-                            </div>
-                        </div>
-
                         {/* Sub Project Type */}
                         <div>
                             <div className="flex justify-between items-center mb-1">
@@ -325,11 +253,11 @@ const AddProjectType = () => {
                                 <div className="flex gap-1">
                                     <select
                                         className="text-xs border border-gray-200 rounded px-1 py-0.5 outline-none text-gray-500 bg-transparent"
-                                        value={selectedProjectTypeForSubPT}
-                                        onChange={(e) => setSelectedProjectTypeForSubPT(e.target.value)}
+                                        value={selectedSubCategoryForSubPT}
+                                        onChange={(e) => setSelectedSubCategoryForSubPT(e.target.value)}
                                     >
-                                        <option value="">Project Type</option>
-                                        {projectTypes.map(c => <option key={c._id} value={c._id}>{c.name}</option>)}
+                                        <option value="">Sub Category</option>
+                                        {subCategories.map(c => <option key={c._id} value={c._id}>{c.name}</option>)}
                                     </select>
                                 </div>
                             </div>
@@ -352,7 +280,7 @@ const AddProjectType = () => {
                     </div>
 
                     {/* Summary Cards Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
                         {/* Category Summary */}
                         <div className="border border-[#0073B7] rounded-md overflow-hidden bg-white">
@@ -482,79 +410,6 @@ const AddProjectType = () => {
                             </div>
                         </div>
 
-                        {/* Project Type Summary */}
-                        <div className="border border-[#17A2B8] rounded-md overflow-hidden bg-white">
-                            <div className="bg-[#17A2B8] text-white py-2 text-center font-semibold text-sm">
-                                Project Type Summary
-                            </div>
-                            <div className="p-3 overflow-y-auto min-h-[150px] max-h-[300px]">
-                                {projectTypes.length === 0 ? (
-                                    <div className="text-gray-400 text-center py-6 text-sm">No project types</div>
-                                ) : (
-                                    projectTypes.map((item, idx) => (
-                                        <div key={item._id} className="flex justify-between items-center py-2.5 border-b border-gray-100 last:border-0 border-dashed">
-                                            {editingItem?.id === item._id && editingItem?.type === 'pt' ? (
-                                                <div className="flex-1 flex flex-col gap-2 mr-4">
-                                                    <div className="flex items-center gap-2">
-                                                        <span className="text-sm text-gray-800">{idx + 1}.</span>
-                                                        <input 
-                                                            type="text" 
-                                                            className="flex-1 border border-[#17A2B8] rounded px-2 py-1 text-sm outline-none focus:border-[#138496]"
-                                                            value={editingItem.name}
-                                                            onChange={(e) => setEditingItem({ ...editingItem, name: e.target.value })}
-                                                            placeholder="Project Type Name"
-                                                            autoFocus
-                                                        />
-                                                    </div>
-                                                    <div className="flex items-center gap-2 pl-4">
-                                                        <select
-                                                            className="flex-1 text-xs border border-gray-300 rounded px-2 py-1 outline-none focus:border-[#138496] bg-white"
-                                                            value={editingItem.subCategoryId || ''}
-                                                            onChange={(e) => setEditingItem({ ...editingItem, subCategoryId: e.target.value })}
-                                                        >
-                                                            <option value="">Select Sub Category</option>
-                                                            {subCategories.map(c => <option key={c._id} value={c._id}>{c.name}</option>)}
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            ) : (
-                                                <div className="flex flex-col">
-                                                    <span className="text-sm text-gray-800">{idx + 1}. {item.name}</span>
-                                                    {(item.subCategoryId?.name) && (
-                                                        <span className="text-[10px] text-gray-500 pl-4 bg-gray-50 rounded mt-0.5 max-w-max px-1 border border-gray-100">{item.subCategoryId?.name}</span>
-                                                    )}
-                                                </div>
-                                            )}
-                                            
-                                            <div className="flex items-center gap-4">
-                                                {editingItem?.id === item._id && editingItem?.type === 'pt' ? (
-                                                    <>
-                                                        <button onClick={handleEditSave} className="text-green-500 flex items-center gap-1 text-[13px] font-medium hover:text-green-600 transition-colors">
-                                                            <Check size={14} strokeWidth={2.5} /> Save
-                                                        </button>
-                                                        <button onClick={handleEditCancel} className="text-gray-500 flex items-center gap-1 text-[13px] font-medium hover:text-gray-600 transition-colors">
-                                                            <X size={14} strokeWidth={2.5} /> Cancel
-                                                        </button>
-                                                    </>
-                                                ) : (
-                                                    <>
-                                                        <button onClick={() => handleEditStart('pt', item)} className="text-orange-500 flex items-center gap-1 text-[13px] font-medium hover:text-orange-600 transition-colors">
-                                                            <Edit2 size={12} strokeWidth={2.5} /> Edit
-                                                        </button>
-                                                        <button onClick={() => handleDelete('pt', item._id)} className="text-red-500 hover:text-red-600 transition-colors flex items-center justify-center">
-                                                            <div className="w-[15px] h-[15px] rounded-full border-2 border-red-500 flex items-center justify-center">
-                                                                <X size={10} strokeWidth={3} className="text-red-500" />
-                                                            </div>
-                                                        </button>
-                                                    </>
-                                                )}
-                                            </div>
-                                        </div>
-                                    ))
-                                )}
-                            </div>
-                        </div>
-
                         {/* Sub Project Type Summary */}
                         <div className="border border-[#FFC107] rounded-md overflow-hidden bg-white">
                             <div className="bg-[#FFC107] text-[#333] py-2 text-center font-semibold text-sm">
@@ -582,19 +437,19 @@ const AddProjectType = () => {
                                                     <div className="flex items-center gap-2 pl-4">
                                                         <select
                                                             className="flex-1 text-xs border border-gray-300 rounded px-2 py-1 outline-none focus:border-[#E0A800] bg-white"
-                                                            value={editingItem.projectTypeId || ''}
-                                                            onChange={(e) => setEditingItem({ ...editingItem, projectTypeId: e.target.value })}
+                                                            value={editingItem.subCategoryId || ''}
+                                                            onChange={(e) => setEditingItem({ ...editingItem, subCategoryId: e.target.value })}
                                                         >
-                                                            <option value="">Select Project Type</option>
-                                                            {projectTypes.map(c => <option key={c._id} value={c._id}>{c.name}</option>)}
+                                                            <option value="">Select Sub Category</option>
+                                                            {subCategories.map(c => <option key={c._id} value={c._id}>{c.name}</option>)}
                                                         </select>
                                                     </div>
                                                 </div>
                                             ) : (
                                                 <div className="flex flex-col">
                                                     <span className="text-sm text-gray-800">{idx + 1}. {item.name}</span>
-                                                    {(item.projectTypeId?.name || item.projectType?.name) && (
-                                                        <span className="text-[10px] text-gray-500 pl-4 bg-gray-50 rounded mt-0.5 max-w-max px-1 border border-gray-100">{item.projectTypeId?.name || item.projectType?.name}</span>
+                                                    {(item.subCategoryId?.name || item.subCategory?.name) && (
+                                                        <span className="text-[10px] text-gray-500 pl-4 bg-gray-50 rounded mt-0.5 max-w-max px-1 border border-gray-100">{item.subCategoryId?.name || item.subCategory?.name}</span>
                                                     )}
                                                 </div>
                                             )}

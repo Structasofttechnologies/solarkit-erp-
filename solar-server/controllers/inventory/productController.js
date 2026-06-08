@@ -1,12 +1,28 @@
 import Product from '../../models/inventory/Product.js';
+import BrandManufacturer from '../../models/inventory/BrandManufacturer.js';
 
 export const getAllProducts = async (req, res, next) => {
   try {
-    const { categoryId, status, skuId, unitId, stateId, cityId, districtId, clusterId, projectTypeId } = req.query;
+    const { categoryId, subCategoryId, status, skuId, unitId, stateId, cityId, districtId, clusterId, projectTypeId, subProjectTypeId, brandId, productType } = req.query;
     const query = {};
+    
+    // If productType is provided (e.g., 'inverter' or 'panel'), find matching brands first
+    if (productType) {
+      const matchingBrands = await BrandManufacturer.find({ product: { $regex: new RegExp(productType, 'i') } }).select('_id');
+      const brandIds = matchingBrands.map(b => b._id);
+      query.brandId = { $in: brandIds };
+    }
+
     if (status !== undefined) query.status = status === 'true';
     if (categoryId) query.categoryId = categoryId;
+    if (subCategoryId) query.subCategoryId = subCategoryId;
     if (projectTypeId) query.projectTypeId = projectTypeId;
+    if (subProjectTypeId) query.subProjectTypeId = subProjectTypeId;
+    if (brandId) query.brandId = brandId; // Note: if productType is also used, this overrides or limits it based on logic. Let's just set it.
+    // Ensure brandId works with productType if both are provided
+    if (brandId && productType) {
+      query.brandId = brandId; 
+    }
     if (skuId) query.skuId = skuId;
     if (unitId) query.unitId = unitId;
     if (stateId) query.stateId = stateId;
@@ -31,7 +47,61 @@ export const getAllProducts = async (req, res, next) => {
       .populate('clusterId')
       .sort({ createdAt: -1 });
 
-    res.json({ success: true, count: products.length, data: products });
+    const protocol = req.headers['x-forwarded-proto'] || req.protocol;
+    const host = req.headers['x-forwarded-host'] || req.get('host');
+    const baseUrl = `${protocol}://${host}`;
+
+    const formattedProducts = products.map(product => {
+      const p = product.toJSON ? product.toJSON() : product;
+      if (p.brandId && p.brandId.brandLogo) {
+        if (!p.brandId.brandLogo.startsWith('http') && !p.brandId.brandLogo.startsWith('data:image')) {
+          p.brandId.brandLogoUrl = `${baseUrl}${p.brandId.brandLogo}`;
+        } else {
+          p.brandId.brandLogoUrl = p.brandId.brandLogo;
+        }
+      }
+
+      // Remove unnecessary bulky fields from response
+      delete p.categoryId;
+      delete p.categoryIds;
+      delete p.subCategoryId;
+      delete p.subCategoryIds;
+      delete p.projectTypeId;
+      delete p.subProjectTypeId;
+      delete p.subProjectTypeIds;
+
+      if (p.brandId) {
+        const brandObj = p.brandId;
+        delete p.brandId;
+        // Merge brand fields, avoid overwriting product _id
+        for (const key in brandObj) {
+          if (key !== '_id' && key !== 'id' && key !== 'name') {
+            p[key] = brandObj[key];
+          }
+        }
+      }
+
+      return p;
+    });
+
+    if (req.query.returnBrandsOnly === 'true') {
+      const brandsList = formattedProducts
+        .map(p => p.brandId)
+        .filter(b => b != null);
+
+      // Remove duplicates by brand _id
+      const uniqueBrands = [];
+      const seen = new Set();
+      for (const b of brandsList) {
+        if (!seen.has(b._id.toString())) {
+          seen.add(b._id.toString());
+          uniqueBrands.push(b);
+        }
+      }
+      return res.json({ success: true, count: uniqueBrands.length, data: uniqueBrands });
+    }
+
+    res.json({ success: true, count: formattedProducts.length, data: formattedProducts });
   } catch (err) {
     next(err);
   }
@@ -65,12 +135,12 @@ export const getProductById = async (req, res, next) => {
 
 export const createProduct = async (req, res, next) => {
   try {
-    const { 
+    const {
       name, categoryId, categoryIds, subCategoryId, subCategoryIds, projectTypeId, projectTypeFrom, projectTypeTo, projectTypes, subProjectTypeId, subProjectTypeIds, brandId, unitId, skuId, stateId, cityId, districtId, clusterId, description,
       serialNo, subtype, technology, tolerance, dcr, datasheet,
       mechanicalParameters, electricalParameters, skuParameters, additionalSkus
     } = req.body;
-    
+
     // Helper to handle empty strings for ObjectIds
     const toId = (val) => (val === "" || val === null) ? undefined : val;
 
@@ -127,8 +197,8 @@ export const updateProduct = async (req, res, next) => {
 
     // Define all possible fields
     const fields = [
-      'name', 'categoryId', 'categoryIds', 'subCategoryId', 'subCategoryIds', 'projectTypeId', 'projectTypeFrom', 'projectTypeTo', 
-      'projectTypes', 'subProjectTypeId', 'subProjectTypeIds', 'brandId', 'unitId', 'skuId', 
+      'name', 'categoryId', 'categoryIds', 'subCategoryId', 'subCategoryIds', 'projectTypeId', 'projectTypeFrom', 'projectTypeTo',
+      'projectTypes', 'subProjectTypeId', 'subProjectTypeIds', 'brandId', 'unitId', 'skuId',
       'stateId', 'cityId', 'districtId', 'clusterId', 'description', 'status',
       'serialNo', 'subtype', 'technology', 'tolerance', 'dcr', 'datasheet',
       'mechanicalParameters', 'electricalParameters', 'skuParameters', 'additionalSkus'
@@ -139,12 +209,12 @@ export const updateProduct = async (req, res, next) => {
         if (['categoryId', 'subCategoryId', 'projectTypeId', 'brandId', 'unitId', 'skuId', 'stateId', 'cityId', 'districtId', 'clusterId', 'subProjectTypeId'].includes(field)) {
           updateData[field] = toId(req.body[field]);
         } else if (['subProjectTypeIds', 'categoryIds', 'subCategoryIds'].includes(field) && Array.isArray(req.body[field])) {
-           updateData[field] = req.body[field].map(toId).filter(Boolean);
-           // Sync singular fields
-           if (field === 'categoryIds' && updateData[field].length > 0) updateData.categoryId = updateData[field][0];
-           if (field === 'subCategoryIds' && updateData[field].length > 0) updateData.subCategoryId = updateData[field][0];
+          updateData[field] = req.body[field].map(toId).filter(Boolean);
+          // Sync singular fields
+          if (field === 'categoryIds' && updateData[field].length > 0) updateData.categoryId = updateData[field][0];
+          if (field === 'subCategoryIds' && updateData[field].length > 0) updateData.subCategoryId = updateData[field][0];
         } else if (field === 'technology' && Array.isArray(req.body[field])) {
-           updateData[field] = req.body[field].join(', ');
+          updateData[field] = req.body[field].join(', ');
         } else {
           updateData[field] = req.body[field];
         }

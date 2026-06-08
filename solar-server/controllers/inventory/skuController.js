@@ -3,19 +3,120 @@ import Product from '../../models/inventory/Product.js';
 
 export const getAllSKUs = async (req, res, next) => {
     try {
-        const { status, brand, product, category, projectType, productType, technology, wattage } = req.query;
+        const { status, brand, product, category, projectType, productType, technology, wattage, productName } = req.query;
         const query = {};
         if (status !== undefined) query.status = status === 'true';
         if (brand) query.brand = brand;
         if (product) query.product = product;
-        if (category) query.category = category;
         if (projectType) query.projectType = projectType;
         if (productType) query.productType = productType;
         if (technology) query.technology = technology;
         if (wattage) query.wattage = wattage;
 
-        const skus = await SKU.find(query).sort({ createdAt: -1 });
-        res.json({ success: true, count: skus.length, data: skus });
+        // Filter by category — with fallback to product names containing the category name (e.g. 'BOS', 'Inverter', 'Panel')
+        if (category) {
+            const cleanCat = category.trim();
+            let regexPattern = cleanCat;
+            if (cleanCat.toUpperCase() === 'BOS') {
+                regexPattern = 'BOS';
+            } else if (cleanCat.toLowerCase().includes('inverter') || cleanCat.toLowerCase().includes('invertor')) {
+                regexPattern = 'Invert';
+            } else if (cleanCat.toLowerCase().includes('panel')) {
+                regexPattern = 'Panel';
+            }
+
+            const matchingProducts = await Product.find({ name: { $regex: new RegExp(regexPattern, 'i') } }).select('_id');
+            const productIds = matchingProducts.map(p => p._id);
+            query.$or = [
+                { category: { $regex: new RegExp(cleanCat, 'i') } },
+                { product: { $in: productIds } }
+            ];
+        }
+
+        // Filter by product name — find matching product IDs first, then filter SKUs
+        if (productName) {
+            const matchingProducts = await Product.find({ name: { $regex: new RegExp(productName, 'i') } }).select('_id');
+            const productIds = matchingProducts.map(p => p._id);
+            query.product = { $in: productIds };
+        }
+
+
+        const skus = await SKU.find(query)
+            .populate({
+                path: 'product',
+                select: 'name brandId',
+                populate: {
+                    path: 'brandId',
+                    select: 'companyName brand brandLogo'
+                }
+            })
+            .populate({
+                path: 'brand',
+                model: 'BrandManufacturer',
+                select: 'companyName brand brandLogo'
+            })
+            .sort({ createdAt: -1 });
+
+        const protocol = req.headers['x-forwarded-proto'] || req.protocol;
+        const host = req.headers['x-forwarded-host'] || req.get('host');
+        const baseUrl = `${protocol}://${host}`;
+
+        const buildLogoUrl = (logo) => logo
+            ? (logo.startsWith('http') || logo.startsWith('data:image') ? logo : `${baseUrl}${logo}`)
+            : null;
+
+        const formatted = skus.map(sku => {
+            const s = sku.toJSON ? sku.toJSON() : sku;
+
+            // Priority 1: brand from linked Product — flatten to root
+            if (s.product?.brandId) {
+                const b = s.product.brandId;
+                s.productId = s.product._id;
+                s.productName = s.product.name;
+                s.companyName = b.companyName || null;
+                s.brandName = b.brand || null;
+                s.brandLogo = b.brandLogo || null;
+                s.brandLogoUrl = buildLogoUrl(b.brandLogo);
+            }
+            // Priority 2: direct 'brand' field on SKU (older SKUs without product link)
+            else if (s.brand && typeof s.brand === 'object') {
+                const b = s.brand;
+                s.productId = null;
+                s.productName = null;
+                s.companyName = b.companyName || null;
+                s.brandName = b.brand || null;
+                s.brandLogo = b.brandLogo || null;
+                s.brandLogoUrl = buildLogoUrl(b.brandLogo);
+            }
+
+            // Always add name and skuName (since frontend dropdowns and quick quote look for name/skuName)
+            s.name = s.description || s.skuCode;
+            s.skuName = s.skuCode;
+            s.productName = s.productName || s.description || s.skuCode;
+
+            // Override for BOS Kits: remove manufacturer brand info and use the specialized BOS kit image
+            const isBos = (s.category && s.category.toUpperCase() === 'BOS') ||
+                          (s.productName && s.productName.toUpperCase().includes('BOS')) ||
+                          (s.skuCode && s.skuCode.toUpperCase().includes('BOS'));
+
+            if (isBos) {
+                s.companyName = null;
+                s.brandName = null;
+                s.brandLogo = null;
+                s.brandLogoUrl = null;
+                s.image = "/uploads/images/boskit.png";
+                s.imageUrl = buildLogoUrl("/uploads/images/boskit.png");
+            } else {
+                s.imageUrl = buildLogoUrl(s.image);
+            }
+
+            // Remove nested product object
+            delete s.product;
+
+            return s;
+        });
+
+        res.json({ success: true, count: formatted.length, data: formatted });
     } catch (err) {
         next(err);
     }

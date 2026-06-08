@@ -164,27 +164,33 @@ export const getSubProjectTypesByProjectTypeUniqueId = async (req, res) => {
     }
 
     const ids = projectTypeUniqueId.split(',').map(id => id.trim());
+    const validObjectIds = ids.filter(id => mongoose.Types.ObjectId.isValid(id));
 
+    // Try finding project types
     const projectTypes = await ProjectType.find({
       status: true,
       $or: [
         { unique_id: { $in: ids } },
-        { _id: { $in: ids.filter(id => mongoose.Types.ObjectId.isValid(id)) } }
+        { _id: { $in: validObjectIds } }
       ]
     });
-
-    if (!projectTypes || projectTypes.length === 0) {
-      return res.status(404).json({
-        success: false,
-        message: "Project Types not found",
-      });
-    }
-
     const projectTypeIds = projectTypes.map(pt => pt._id);
 
-    const subProjectTypes = await SubProjectType.find({
-      projectTypeId: { $in: projectTypeIds },
+    // Try finding sub categories
+    const subCategories = await mongoose.model('SubCategory').find({
       status: true,
+      _id: { $in: validObjectIds }
+    });
+    const subCategoryIds = subCategories.map(sc => sc._id);
+
+    // Find SubProjectTypes matching either projectTypeId or subCategoryId or the direct ID in the parameters list
+    const subProjectTypes = await SubProjectType.find({
+      status: true,
+      $or: [
+        { projectTypeId: { $in: projectTypeIds } },
+        { subCategoryId: { $in: subCategoryIds } },
+        { subCategoryId: { $in: validObjectIds } }
+      ]
     }).sort({ createdAt: -1 });
 
     return res.status(200).json({
@@ -554,7 +560,8 @@ export const getDynamicAvailableFilters = async (req, res) => {
 // 4.11 Get Filtered Combokits for Mobile — filter by brand only
 export const getFilteredCombokits = async (req, res) => {
   try {
-    const { brandId } = req.query;
+    const { brandId, kilowatt } = req.query;
+    const kw = kilowatt ? parseFloat(kilowatt) : null;
 
     const isObjectId = (id) => mongoose.Types.ObjectId.isValid(id) && String(new mongoose.Types.ObjectId(id)) === id;
 
@@ -628,9 +635,17 @@ export const getFilteredCombokits = async (req, res) => {
       if (b.brand) brandMap[b.brand.toLowerCase()] = b.brandLogo;
     });
 
+    const getFullUrl = (urlPath) => {
+      if (!urlPath) return null;
+      if (urlPath.startsWith('/uploads/')) {
+        return `${req.protocol}://${req.get('host')}${urlPath}`;
+      }
+      return urlPath;
+    };
+
     const getBrandLogo = (brandName) => {
       if (!brandName) return null;
-      return brandMap[brandName.toLowerCase()] || null;
+      return getFullUrl(brandMap[brandName.toLowerCase()] || null);
     };
 
     // Format response for mobile list — flatten each comboKit variant as its own item
@@ -686,7 +701,7 @@ export const getFilteredCombokits = async (req, res) => {
             name: kit.name || kitName,
             status: a.status,
             // ─── Kit Image ────────────────────────────────────────────────
-            image: kit.image || null,
+            image: getFullUrl(kit.image) || null,
             // ─── Panel Brand ──────────────────────────────────────────────
             panelBrand: kit.panelBrand || null,
             panelBrandImage: getBrandLogo(kit.panelBrand),
@@ -699,6 +714,19 @@ export const getFilteredCombokits = async (req, res) => {
             // ─── Price (from parent combokit) ─────────────────────────────
             ...priceBlock,
           });
+        }
+      }
+    }
+
+    // If kilowatt param provided, multiply finalPrice by kilowatt and show in finalPrice itself
+    if (kw != null && !isNaN(kw)) {
+      for (const item of formatted) {
+        item.kilowatt = kw;
+        if (item.finalPrice != null) {
+          const total = Math.round(kw * item.finalPrice * 100) / 100;
+          item.perKwPrice = item.finalPrice;
+          item.finalPrice = total;
+          item.finalPriceFormatted = `₹${total.toLocaleString('en-IN')}`;
         }
       }
     }

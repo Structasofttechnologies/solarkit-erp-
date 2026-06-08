@@ -209,7 +209,7 @@ const salesSettingsService = {
   async getPartnerTypes() {
     try {
       const res = await api.get('/partner-settings/types');
-      return res.data;
+      return res.data?.data || res.data || [];
     } catch (err) {
       console.warn('getPartnerTypes failed (non-critical):', err.response?.status);
       return [];

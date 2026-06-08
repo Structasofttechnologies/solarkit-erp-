@@ -131,7 +131,7 @@ export const getPlansByRole = async (role) => {
 // Partner Settings API
 export const getPartnerTypes = async () => {
     const response = await api.get('/partner-settings/types');
-    return response.data;
+    return response.data?.data || response.data || [];
 };
 
 export const getPartnerPlans = async (partnerType, stateId) => {

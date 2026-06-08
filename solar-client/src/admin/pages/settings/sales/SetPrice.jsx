@@ -1502,7 +1502,7 @@ export default function SetPrice() {
                    <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Partner Type</label>
                    <select className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none transition-all text-sm" value={newPriceForm.role} onChange={e => setNewPriceForm({ ...newPriceForm, role: e.target.value })}>
                       <option value="">All Partners</option>
-                      {partnerTypes?.filter((type, index, self) => 
+                      {(Array.isArray(partnerTypes) ? partnerTypes : [])?.filter((type, index, self) => 
                         index === self.findIndex((t) => t.name === type.name)
                       ).map(p => (
                         <option key={p._id} value={p.name}>{p.name}</option>
