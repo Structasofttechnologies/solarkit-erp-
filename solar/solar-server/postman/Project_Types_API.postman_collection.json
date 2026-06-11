@@ -1,0 +1,332 @@
+{
+  "info": {
+    "name": "Product Settings API (Categories -> Project Types)",
+    "description": "API endpoints for Categories, Sub Categories, Project Types, and Sub Project Types.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Categories",
+      "item": [
+        {
+          "name": "Get All Categories",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/masters/categories",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "masters", "categories"]
+            }
+          }
+        },
+        {
+          "name": "Create Category",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Solar Panels\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/masters/categories",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "masters", "categories"]
+            }
+          }
+        },
+        {
+          "name": "Update Category",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Solar Panels Updated\",\n    \"status\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/masters/categories/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "masters", "categories", ":id"],
+              "variable": [{ "key": "id", "value": "replace_with_category_id" }]
+            }
+          }
+        },
+        {
+          "name": "Delete Category",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/masters/categories/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "masters", "categories", ":id"],
+              "variable": [{ "key": "id", "value": "replace_with_category_id" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Sub Categories",
+      "item": [
+        {
+          "name": "Get Sub Categories by Category ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/masters/sub-categories?categoryId={{categoryId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "masters", "sub-categories"],
+              "query": [
+                { "key": "categoryId", "value": "{{categoryId}}" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Sub Category",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Monocrystalline\",\n    \"categoryId\": \"{{categoryId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/masters/sub-categories",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "masters", "sub-categories"]
+            }
+          }
+        },
+        {
+          "name": "Update Sub Category",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Monocrystalline Updated\",\n    \"categoryId\": \"{{categoryId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/masters/sub-categories/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "masters", "sub-categories", ":id"],
+              "variable": [{ "key": "id", "value": "replace_with_sub_category_id" }]
+            }
+          }
+        },
+        {
+          "name": "Delete Sub Category",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/masters/sub-categories/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "masters", "sub-categories", ":id"],
+              "variable": [{ "key": "id", "value": "replace_with_sub_category_id" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Project Types",
+      "item": [
+        {
+          "name": "Get Project Types by Sub Category ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/masters/project-types?subCategoryId={{subCategoryId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "masters", "project-types"],
+              "query": [
+                { "key": "subCategoryId", "value": "{{subCategoryId}}" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Project Type",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"10 kW to 15 kW\",\n    \"subCategoryId\": \"{{subCategoryId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/masters/project-types",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "masters", "project-types"]
+            }
+          }
+        },
+        {
+          "name": "Update Project Type",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"15 kW to 20 kW\",\n    \"subCategoryId\": \"{{subCategoryId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/masters/project-types/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "masters", "project-types", ":id"],
+              "variable": [{ "key": "id", "value": "replace_with_project_type_id" }]
+            }
+          }
+        },
+        {
+          "name": "Delete Project Type",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/masters/project-types/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "masters", "project-types", ":id"],
+              "variable": [{ "key": "id", "value": "replace_with_project_type_id" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Sub Project Types",
+      "item": [
+        {
+          "name": "Get Sub Project Types by Project Type ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/masters/sub-project-types?projectTypeId={{projectTypeId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "masters", "sub-project-types"],
+              "query": [
+                { "key": "projectTypeId", "value": "{{projectTypeId}}" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Sub Project Type",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Standard Install\",\n    \"projectTypeId\": \"{{projectTypeId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/masters/sub-project-types",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "masters", "sub-project-types"]
+            }
+          }
+        },
+        {
+          "name": "Update Sub Project Type",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Premium Install\",\n    \"projectTypeId\": \"{{projectTypeId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/masters/sub-project-types/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "masters", "sub-project-types", ":id"],
+              "variable": [{ "key": "id", "value": "replace_with_sub_project_type_id" }]
+            }
+          }
+        },
+        {
+          "name": "Delete Sub Project Type",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/masters/sub-project-types/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "masters", "sub-project-types", ":id"],
+              "variable": [{ "key": "id", "value": "replace_with_sub_project_type_id" }]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000"
+    },
+    {
+      "key": "token",
+      "value": "your_jwt_token_here"
+    },
+    {
+      "key": "categoryId",
+      "value": "replace_with_parent_category_id"
+    },
+    {
+      "key": "subCategoryId",
+      "value": "replace_with_parent_sub_category_id"
+    },
+    {
+      "key": "projectTypeId",
+      "value": "replace_with_parent_project_type_id"
+    }
+  ]
+}

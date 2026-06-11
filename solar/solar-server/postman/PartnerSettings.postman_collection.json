@@ -1,0 +1,100 @@
+{
+  "info": {
+    "name": "Partner Settings API",
+    "description": "API collection for Partner Settings (Create, Fetch, Update, Delete Partner Types)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Partner Types",
+      "item": [
+        {
+          "name": "Create Partner Type",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Dealer\",\n  \"isActive\": true\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/partner-settings/types",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "partner-settings", "types"]
+            }
+          }
+        },
+        {
+          "name": "Get Partner Types",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/partner-settings/types",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "partner-settings", "types"]
+            }
+          }
+        },
+        {
+          "name": "Update Partner Type",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Dealer Updated\",\n  \"isActive\": false\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/partner-settings/types/:id",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "partner-settings", "types", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "ENTER_PARTNER_ID_HERE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Partner Type",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5000/api/partner-settings/types/:id",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "partner-settings", "types", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "ENTER_PARTNER_ID_HERE"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

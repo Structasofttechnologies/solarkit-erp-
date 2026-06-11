@@ -1,0 +1,84 @@
+{
+	"info": {
+		"_postman_id": "mobile-metadata-collection",
+		"name": "Mobile Metadata & Filters",
+		"description": "APIs to fetch related Categories, Sub Categories, Project Types, and Sub Project Types for cascading dropdowns in the mobile application based on unique_id.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5000/api"
+		},
+		{
+			"key": "categoryUniqueId",
+			"value": "ENTER_CATEGORY_UNIQUE_ID"
+		},
+		{
+			"key": "subCategoryUniqueId",
+			"value": "ENTER_SUB_CATEGORY_UNIQUE_ID"
+		},
+		{
+			"key": "projectTypeUniqueId",
+			"value": "ENTER_PROJECT_TYPE_UNIQUE_ID"
+		}
+	],
+	"item": [
+		{
+			"name": "1. Get All Categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/mobile-metadata/categories",
+					"host": ["{{baseUrl}}"],
+					"path": ["mobile-metadata", "categories"]
+				},
+				"description": "Fetch a list of all active Categories."
+			},
+			"response": []
+		},
+		{
+			"name": "2. Get Sub Categories By Category Unique ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/mobile-metadata/sub-categories/{{categoryUniqueId}}",
+					"host": ["{{baseUrl}}"],
+					"path": ["mobile-metadata", "sub-categories", "{{categoryUniqueId}}"]
+				},
+				"description": "Fetch Sub Categories linked to a specific Category unique_id."
+			},
+			"response": []
+		},
+		{
+			"name": "3. Get Project Types By Sub Category Unique ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/mobile-metadata/project-types/{{subCategoryUniqueId}}",
+					"host": ["{{baseUrl}}"],
+					"path": ["mobile-metadata", "project-types", "{{subCategoryUniqueId}}"]
+				},
+				"description": "Fetch Project Types that are mapped to a specific Sub Category unique_id."
+			},
+			"response": []
+		},
+		{
+			"name": "4. Get Sub Project Types By Project Type Unique ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/mobile-metadata/sub-project-types/{{projectTypeUniqueId}}",
+					"host": ["{{baseUrl}}"],
+					"path": ["mobile-metadata", "sub-project-types", "{{projectTypeUniqueId}}"]
+				},
+				"description": "Fetch Sub Project Types linked to a specific Project Type unique_id."
+			},
+			"response": []
+		}
+	]
+}

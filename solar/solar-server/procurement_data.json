@@ -1,0 +1,60 @@
+[
+  {
+    "_id": "69b6f93bc34bd231a11b74ec",
+    "category": "Solar Rooftop",
+    "subCategory": "Commercial",
+    "projectType": "3 to 30 kW",
+    "subProjectType": "On-Grid",
+    "product": "69b28fe6ce56bcc873e75ea4",
+    "brand": "69a7491e38f8a242baa3f00b",
+    "skuSelectionOption": "ComboKit",
+    "skus": [
+      "69b294ea94b92d7eb59bb611"
+    ],
+    "skuItems": [
+      {
+        "minRange": 11,
+        "maxRange": 22,
+        "comboKit": "69bbfa7d025e140537bb8567",
+        "supplierType": "69bbfa7d025e140537bb8567",
+        "_id": "69b6f93bc34bd231a11b74ed"
+      }
+    ],
+    "createdBy": "6996e969862f2d7bc130fa59",
+    "createdAt": "2026-03-15T18:23:55.753Z",
+    "updatedAt": "2026-03-20T13:29:59.696Z",
+    "__v": 0,
+    "updatedBy": "6996e969862f2d7bc130fa59"
+  },
+  {
+    "_id": "69bd86d191c84a36860ab123",
+    "category": "Solar Rooftop",
+    "subCategory": "Commercial",
+    "projectType": "2 to 20 kW",
+    "subProjectType": "Off grid",
+    "product": "69b27a440e4d75fc7541908a",
+    "brand": "69a7491e38f8a242baa3f00b",
+    "paymentType": "Loan",
+    "skuSelectionOption": "ComboKit",
+    "skus": [
+      "69b2907894b92d7eb59bb323"
+    ],
+    "skuItems": [
+      {
+        "minRange": 11,
+        "maxRange": 44,
+        "assignModules": [
+          "P.O Order"
+        ],
+        "supplierType": [
+          "69bd79f1025e140537bb8cad"
+        ],
+        "_id": "69bd86d191c84a36860ab124"
+      }
+    ],
+    "createdBy": "6996e969862f2d7bc130fa59",
+    "createdAt": "2026-03-20T17:41:37.800Z",
+    "updatedAt": "2026-03-20T17:41:37.800Z",
+    "__v": 0
+  }
+]

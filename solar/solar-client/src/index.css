@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+/* Add these styles to your main CSS file */
+.clickable { 
+  cursor: pointer; 
+  transition: transform 0.2s ease; 
+}
+
+.clickable:hover { 
+  transform: scale(1.05); 
+}
+
+.selected-card { 
+  background-color: #0d6efd !important; 
+  color: white; 
+  border-color: #0d6efd; 
+}
+
+.cluster-card, .district-card, .cp-type-card {
+  border: 1px solid #ccc; 
+  padding: 15px; 
+  text-align: center;
+  border-radius: 8px; 
+  cursor: pointer; 
+  margin-bottom: 10px; 
+  transition: transform 0.2s ease;
+}
+
+.cluster-card:hover, .district-card:hover, .cp-type-card:hover { 
+  transform: scale(1.05); 
+}
+
+.cluster-card.selected { 
+  background-color: #705ebe; 
+  color: white; 
+  border-color: #3d0a77; 
+}
+
+.district-card.selected { 
+  background-color: #198754; 
+  color: white; 
+  border-color: #14532d; 
+}
+
+.cp-type-card.selected { 
+  background-color: #7753bb; 
+  color: white; 
+  border-color: #523091; 
+}
+
+.kw-input { 
+  width: 120px; 
+  height: 40px; 
+  font-size: 16px; 
+  text-align: center;
+}
+
+.table-responsive { 
+  overflow-x: auto; 
+}
+
+.section-title { 
+  border-left: 4px solid #0d6efd; 
+  padding-left: 10px; 
+  margin-top: 20px; 
+  margin-bottom: 15px;
+}
+
+.card-header { 
+  background-color: #f8f9fa; 
+}
+
+.bundle-name { 
+  background-color: #f8f9fa; 
+  padding: 8px; 
+  border-radius: 4px; 
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.action-buttons { 
+  white-space: nowrap; 
+}
+
+.action-buttons button { 
+  margin-right: 5px; 
+}
+
+.view-mode { 
+  background-color: #f8f9fa; 
+  padding: 8px; 
+  border-radius: 4px; 
+}
+
+.edit-mode { 
+  background-color: #ffffff; 
+  padding: 8px; 
+  border: 1px solid #ddd; 
+  border-radius: 4px; 
+}
+
+.btn-view { 
+  background-color: #6c757d; 
+  border-color: #6c757d; 
+}
+
+.btn-view:hover { 
+  background-color: #5a6268; 
+  border-color: #545b62; 
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(-5%); animation-timing-function: cubic-bezier(0.8, 0, 1, 1); }
+  50% { transform: translateY(0); animation-timing-function: cubic-bezier(0, 0, 0.2, 1); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 3s infinite;
+}
